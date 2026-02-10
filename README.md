@@ -1,10 +1,10 @@
-# SimLab Verpleegoproepsysteem (Dit is een prototype)
+# SimLab Verpleegoproepsysteem
 
 ## ✏️ Projectbeschrijving
 
 Het doel van dit project is om een systeem te ontwikkelen die hulpverlenend personeel help om visueel te zien welke patiënten zorg nodig hebben en waar collega’s al bezig zijn. Het systeem werkt met drukknoppen en signalisatie lampen zodat de status van de kamer kan weergegeven worden. Wanneer de patiënt urgente hulp nodig geeft, krijg het personeel hiervan ook een melding op hun telefoon.
 
-Dit project zal dan ook gebruikt worden door de graduaat en bachelor opleidingen verpleegkunde gebruikt worden als lesmateriaal.
+Dit project zal dan ook werkelijk gebruikt worden door de graduaat en bachelor opleidingen verpleegkunde als lesmateriaal.
 
 ## 📓 Functies/onderdelen
 
@@ -17,6 +17,7 @@ Dit project zal dan ook gebruikt worden door de graduaat en bachelor opleidingen
 Dit zijn uitbreidingen die mogelijk zijn als we genoeg tijd over hebben, de basis functionaliteiten moeten eerst werkend zijn.
 
 - **Applicatie met status:** kan gebruikt worden om weer te geven welke status de geregistreerde kamers hebben.
+- **Batterij status:** de status van de batterij wordtd weergegeven op een applicatie, op deze manier weten we wanneer de batterij moet opgeladen worden.
 
 ## Affiches
 
