@@ -29,7 +29,6 @@ Dit zijn uitbreidingen die mogelijk zijn als we genoeg tijd over hebben, de basi
 
 ## Team
 - [<img src="https://github.com/Thomas8650.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Thomas Demeulenaere, fase 2](https://github.com/Thomas8650)
-
 - [<img src="https://github.com/Gdoc141.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Geal Docdocil, fase 2](https://github.com/Gdoc141)
 - [<img src="https://github.com/ToneyBacon.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Cobe Dudal, fase 1](https://github.com/ToneyBacon)
 - [<img src="https://github.com/RuneLambert.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Rune Lambert, fase 1](https://github.com/RuneLambert)
