@@ -58,4 +58,6 @@ We zullen gebruik maken van Zigbee, dit komt omdat we met ons project de nadruk 
 
 [17 Voordelen en nadelen van Bluetooth](https://barrazacarlos.com/nl/voordelen-en-nadelen-van-bluetooth/)
 
+[Wat zijn de voor- en nadelen van Zigbee](https://homey.app/nl-be/wiki/wat-is-zigbee/)
+
 [Zigbee vs. Z-Wave: Dit zijn de Verschillen!](https://domotiseren.nl/particulier/zigbee-vs-zwave/)
