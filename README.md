@@ -30,8 +30,8 @@ Dit zijn uitbreidingen die mogelijk zijn als we genoeg tijd over hebben, de basi
 ## Folder structuur
 - [Hardware](./hardware/readme.md) : Hier bevind alles te maken met de hardware.
 - [Software](./software/readme.md ) : Hier bevind alles te maken met de software.
-- [Archief](./archief/readme.md) : Hier vindt u moglijke ideeën en onderzoek.
-- [Research](./research/readme.md) : Hier vindt u moglijke ideeën en onderzoek.
+- [Archief](./archief/readme.md) : Hier vindt u moglijke ideeën en bstanden die gebruikt worden in de documentatie.
+- [Research](research/README.md) : Hier vindt u het onderzoek in verband met het project.
 
 ## Team
 - [<img src="https://github.com/Thomas8650.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Thomas Demeulenaere, fase 2](https://github.com/Thomas8650)
