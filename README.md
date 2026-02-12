@@ -24,7 +24,7 @@ Dit zijn uitbreidingen die mogelijk zijn als we genoeg tijd over hebben, de basi
 ### Begin affiche
 
 <div style="display: flex; gap: 10px;">
-   <img src="VIVESVerpleegoproepsysteem.png" height="auto" width="480">
+   <img src="archief\img\VIVESVerpleegoproepsysteem.png" height="auto" width="480">
 </div>
 
 ## Folder structuur
