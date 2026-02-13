@@ -31,10 +31,13 @@ Dit zijn uitbreidingen die mogelijk zijn als we genoeg tijd over hebben, de basi
 - [Hardware](./hardware/readme.md) : Hier bevind alles te maken met de hardware.
 - [Software](./software/readme.md ) : Hier bevind alles te maken met de software.
 - [Archief](./archief/readme.md) : Hier vindt u moglijke ideeën en bstanden die gebruikt worden in de documentatie.
-- [Research](research/README.md) : Hier vindt u het onderzoek in verband met het project.
+- [Research](./research/readme.md) : Hier vindt u het onderzoek in verband met het project.
 
 ## Team
 - [<img src="https://github.com/Thomas8650.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Thomas Demeulenaere, fase 2](https://github.com/Thomas8650)
+
 - [<img src="https://github.com/Gdoc141.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Geal Docdocil, fase 2](https://github.com/Gdoc141)
+
 - [<img src="https://github.com/ToneyBacon.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Cobe Dudal, fase 1](https://github.com/ToneyBacon)
+
 - [<img src="https://github.com/RuneLambert.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Rune Lambert, fase 1](https://github.com/RuneLambert)
