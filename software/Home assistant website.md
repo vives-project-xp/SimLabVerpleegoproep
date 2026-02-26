@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Doel van deze handleiding
+## Doel van deze handleiding
 
 Deze handleiding beschrijft stap voor stap hoe we:
 
@@ -23,7 +23,7 @@ Dit vormt de technische basis voor:
 
 ---
 
-## 🏗 Systeemarchitectuur
+## Systeemarchitectuur
 
 ```
 Webinterface (/local/testsite)
@@ -39,7 +39,7 @@ Zigbee / WLED / Statuslampen / Knoppen
 
 ---
 
-## 1️⃣ Vereisten
+## 1. Vereisten
 
 - Raspberry Pi met Home Assistant OS
 - Toegang tot Home Assistant dashboard
@@ -48,7 +48,7 @@ Zigbee / WLED / Statuslampen / Knoppen
 
 ---
 
-## 2️⃣ Controleren dat de Home Assistant API werkt
+## 2. Controleren dat de Home Assistant API werkt
 
 Voordat we een website maken, testen we eerst of de API correct bereikbaar is.
 
@@ -85,13 +85,13 @@ fetch("/api/config", {
 
 Als dit werkt betekent dat:
 
-- ✅ API is actief
-- ✅ Authenticatie werkt
-- ✅ Home Assistant draait correct
+- API is actief
+- Authenticatie werkt
+- Home Assistant draait correct
 
 ---
 
-## 3️⃣ Webfolder aanmaken in Home Assistant
+## 3. Webfolder aanmaken in Home Assistant
 
 Home Assistant serveert statische bestanden via:
 
@@ -127,7 +127,7 @@ homeassistant/
 
 ---
 
-## 4️⃣ Automatische authenticatie via refresh_token
+## 4. Automatische authenticatie via refresh_token
 
 Access tokens verlopen na ±30 minuten.  
 Daarom gebruiken we de bestaande `refresh_token` uit de actieve Home Assistant sessie.
@@ -146,13 +146,14 @@ Daarom gebruiken we de bestaande `refresh_token` uit de actieve Home Assistant s
 
 ---
 
-## 5️⃣ Volledige werkende testpagina
+## 5. Volledige werkende testpagina
 
 Plaats onderstaande code in:
 
 **`homeassistant/www/testsite/index.html`**
 
-### 🔽 Volledige Code
+<details>
+<summary><strong>Klik hier om de volledige HTML code te bekijken</strong></summary>
 
 ```html
 <!doctype html>
@@ -265,9 +266,9 @@ Plaats onderstaande code in:
     document.getElementById("btnConfig").addEventListener("click", async () => {
       try {
         const data = await haGet("/api/config");
-        log(`SUCCESS ✅ version=${data.version} location_name=${data.location_name}`);
+        log(`SUCCESS - version=${data.version} location_name=${data.location_name}`);
       } catch (e) {
-        log(`ERROR ❌ ${e.message}`);
+        log(`ERROR - ${e.message}`);
       }
     });
 
@@ -275,11 +276,11 @@ Plaats onderstaande code in:
       try {
         await haPost("/api/services/persistent_notification/create", {
           title: "Test website",
-          message: "Als je dit ziet, kan je website Home Assistant aansturen ✅"
+          message: "Als je dit ziet, kan je website Home Assistant aansturen"
         });
-        log("Notification gestuurd ✅");
+        log("Notification gestuurd");
       } catch (e) {
-        log(`ERROR ❌ ${e.message}`);
+        log(`ERROR - ${e.message}`);
       }
     });
   </script>
@@ -288,9 +289,11 @@ Plaats onderstaande code in:
 </html>
 ```
 
+</details>
+
 ---
 
-## 6️⃣ Website openen
+## 6. Website openen
 
 Ga naar:
 
@@ -306,13 +309,13 @@ http://10.10.201.171:8123/local/testsite/index.html
 
 **Belangrijk:**
 
-- ❌ Niet `/config/www/...`
-- ❌ Niet `/www/...`
-- ✅ Enkel `/local/...`
+- Niet `/config/www/...`
+- Niet `/www/...`
+- Enkel `/local/...`
 
 ---
 
-## 7️⃣ Testen
+## 7. Testen
 
 ### Test 1 – API uitlezen
 
@@ -321,7 +324,7 @@ http://10.10.201.171:8123/local/testsite/index.html
 **Verwacht resultaat:**
 
 ```
-SUCCESS ✅ version=2026.2.1 location_name=Thuis
+SUCCESS - version=2026.2.1 location_name=Thuis
 ```
 
 ### Test 2 – Service call uitvoeren
@@ -332,13 +335,13 @@ SUCCESS ✅ version=2026.2.1 location_name=Thuis
 
 ---
 
-## 8️⃣ Wat hebben we technisch gerealiseerd?
+## 8. Wat hebben we technisch gerealiseerd?
 
-- ✔️ Eigen webinterface geïntegreerd in Home Assistant
-- ✔️ Volledig lokale communicatie
-- ✔️ Automatische tokenvernieuwing
-- ✔️ Werkende REST API
-- ✔️ Service calls vanuit custom frontend
+- Eigen webinterface geïntegreerd in Home Assistant
+- Volledig lokale communicatie
+- Automatische tokenvernieuwing
+- Werkende REST API
+- Service calls vanuit custom frontend
 
 **Dit is de basis voor:**
 
@@ -350,7 +353,7 @@ SUCCESS ✅ version=2026.2.1 location_name=Thuis
 
 ---
 
-## 🔐 Beveiligingsopmerking
+## Beveiligingsopmerking
 
 Deze methode werkt zolang:
 
@@ -366,7 +369,7 @@ Deze methode werkt zolang:
 
 ---
 
-## 🚀 Volgende uitbreidingen
+## Volgende uitbreidingen
 
 - Knoppen voor `light.turn_on`
 - Realtime status via WebSocket API
