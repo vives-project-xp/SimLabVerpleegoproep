@@ -1,32 +1,31 @@
-Home Assistant koppelen aan een eigen webinterface
+# Home Assistant koppelen aan een eigen webinterface
 
-SimLab Verpleegoproepsysteem – Technische Integratiegids
+## SimLab Verpleegoproepsysteem – Technische Integratiegids
 
-📌 Doel van deze handleiding
+---
+
+## 📌 Doel van deze handleiding
 
 Deze handleiding beschrijft stap voor stap hoe we:
 
-Een eigen webpagina koppelen aan Home Assistant
-
-Via de website REST API-calls uitvoeren
-
-Automatisch een geldige toegangstoken genereren
-
-Service calls uitvoeren (zoals meldingen of lampen aansturen)
-
-Dit alles volledig lokaal op de Raspberry Pi
+- Een eigen webpagina koppelen aan Home Assistant
+- Via de website REST API-calls uitvoeren
+- Automatisch een geldige toegangstoken genereren
+- Service calls uitvoeren (zoals meldingen of lampen aansturen)
+- Dit alles volledig lokaal op de Raspberry Pi
 
 Dit vormt de technische basis voor:
 
-Webdashboard voor het verpleegoproepsysteem
+- Webdashboard voor het verpleegoproepsysteem
+- Kamerstatus monitoring
+- Scenario simulaties
+- Integratie met Zigbee / WLED / andere devices
 
-Kamerstatus monitoring
+---
 
-Scenario simulaties
+## 🏗 Systeemarchitectuur
 
-Integratie met Zigbee / WLED / andere devices
-
-🏗 Systeemarchitectuur
+```
 Webinterface (/local/testsite)
         ↓
 REST API
@@ -34,38 +33,39 @@ REST API
 Home Assistant (Raspberry Pi 5)
         ↓
 Zigbee / WLED / Statuslampen / Knoppen
+```
 
-Alles draait lokaal. Geen cloud nodig.
+**Alles draait lokaal. Geen cloud nodig.**
 
-1️⃣ Vereisten
+---
 
-Raspberry Pi met Home Assistant OS
+## 1️⃣ Vereisten
 
-Toegang tot Home Assistant dashboard
+- Raspberry Pi met Home Assistant OS
+- Toegang tot Home Assistant dashboard
+- File Editor add-on geïnstalleerd
+- Browser waarin je bent ingelogd op Home Assistant
 
-File Editor add-on geïnstalleerd
+---
 
-Browser waarin je bent ingelogd op Home Assistant
-
-2️⃣ Controleren dat de Home Assistant API werkt
+## 2️⃣ Controleren dat de Home Assistant API werkt
 
 Voordat we een website maken, testen we eerst of de API correct bereikbaar is.
 
-Stap 2.1 – Open de browser console
+### Stap 2.1 – Open de browser console
 
-Open je Home Assistant dashboard
-Bijvoorbeeld:
+1. Open je Home Assistant dashboard  
+   Bijvoorbeeld: `http://10.10.201.171:8123`
 
-http://10.10.201.171:8123
+2. Druk **F12**
 
-Druk F12
+3. Ga naar tab **Console**
 
-Ga naar tab Console
+### Stap 2.2 – Test een API-call
 
-Stap 2.2 – Test een API-call
+Voer dit uit in de console:
 
-Voer dit uit:
-
+```javascript
 fetch("/api/config", {
   headers: {
     Authorization: `Bearer ${JSON.parse(localStorage.getItem("hassTokens")).access_token}`
@@ -73,82 +73,88 @@ fetch("/api/config", {
 })
 .then(r => r.json())
 .then(console.log)
-Verwacht resultaat:
+```
+
+**Verwacht resultaat:**
+```json
 {
   "version": "2026.2.1",
   "location_name": "Thuis"
 }
+```
 
 Als dit werkt betekent dat:
 
-✅ API is actief
+- ✅ API is actief
+- ✅ Authenticatie werkt
+- ✅ Home Assistant draait correct
 
-✅ Authenticatie werkt
+---
 
-✅ Home Assistant draait correct
-
-3️⃣ Webfolder aanmaken in Home Assistant
+## 3️⃣ Webfolder aanmaken in Home Assistant
 
 Home Assistant serveert statische bestanden via:
 
+```
 /config/www/  →  bereikbaar via  /local/
+```
 
-In Home Assistant OS is de map homeassistant/ gelijk aan /config/.
+In Home Assistant OS is de map `homeassistant/` gelijk aan `/config/`.
 
-Stap 3.1 – File Editor installeren
+### Stap 3.1 – File Editor installeren
 
-Ga naar:
+1. Ga naar: **Instellingen → Add-ons → Add-on Store**
 
-Instellingen → Add-ons → Add-on Store
+2. Installeer: **File Editor**
 
-Installeer:
+3. Start de add-on en klik op **Open Web UI**
 
-File Editor
-
-Start de add-on en klik op Open Web UI.
-
-Stap 3.2 – Mapstructuur aanmaken
+### Stap 3.2 – Mapstructuur aanmaken
 
 Maak volgende structuur:
 
+```
 homeassistant/
  └── www/
       └── testsite/
            └── index.html
+```
 
-Belangrijk:
+**Belangrijk:**
 
-Alles in www/ wordt bereikbaar via /local/
+- Alles in `www/` wordt bereikbaar via `/local/`
+- Bestanden buiten deze map zijn niet publiek toegankelijk
 
-Bestanden buiten deze map zijn niet publiek toegankelijk
+---
 
-4️⃣ Automatische authenticatie via refresh_token
+## 4️⃣ Automatische authenticatie via refresh_token
 
-Access tokens verlopen na ±30 minuten.
-Daarom gebruiken we de bestaande refresh_token uit de actieve Home Assistant sessie.
+Access tokens verlopen na ±30 minuten.  
+Daarom gebruiken we de bestaande `refresh_token` uit de actieve Home Assistant sessie.
 
-De webpagina:
+**De webpagina:**
 
-Leest hassTokens uit localStorage
+- Leest `hassTokens` uit localStorage
+- Vraagt via `/auth/token` een nieuwe access_token op
+- Gebruikt die token voor API-calls
 
-Vraagt via /auth/token een nieuwe access_token op
+**Hierdoor is er:**
 
-Gebruikt die token voor API-calls
+- Geen handmatige token copy/paste nodig
+- Geen 30-minuten probleem
+- Geen extra configuratie in Home Assistant nodig
 
-Hierdoor is er:
+---
 
-Geen handmatige token copy/paste nodig
-
-Geen 30-minuten probleem
-
-Geen extra configuratie in Home Assistant nodig
-
-5️⃣ Volledige werkende testpagina
+## 5️⃣ Volledige werkende testpagina
 
 Plaats onderstaande code in:
 
-homeassistant/www/testsite/index.html
-🔽 Volledige Code
+**`homeassistant/www/testsite/index.html`**
+
+### 🔽 Volledige Code
+
+```html
 <!doctype html>
 <html lang="nl">
 <head>
@@ -280,92 +286,90 @@ homeassistant/www/testsite/index.html
 
 </body>
 </html>
-6️⃣ Website openen
+```
+
+---
+
+## 6️⃣ Website openen
 
 Ga naar:
 
+```
 http://<IP-VAN-JE-HA>:8123/local/testsite/index.html
+```
 
-Voorbeeld:
+**Voorbeeld:**
 
+```
 http://10.10.201.171:8123/local/testsite/index.html
+```
 
-Belangrijk:
+**Belangrijk:**
 
-Niet /config/www/...
+- ❌ Niet `/config/www/...`
+- ❌ Niet `/www/...`
+- ✅ Enkel `/local/...`
 
-Niet /www/...
+---
 
-Enkel /local/...
+## 7️⃣ Testen
 
-7️⃣ Testen
-Test 1 – API uitlezen
+### Test 1 – API uitlezen
 
-Klik:
+1. Klik: **Test: GET /api/config**
 
-Test: GET /api/config
+**Verwacht resultaat:**
 
-Verwacht resultaat:
-
+```
 SUCCESS ✅ version=2026.2.1 location_name=Thuis
-Test 2 – Service call uitvoeren
+```
 
-Klik:
+### Test 2 – Service call uitvoeren
 
-Test: Notification
+1. Klik: **Test: Notification**
 
-Controleer in Home Assistant of de melding verschijnt.
+2. Controleer in Home Assistant of de melding verschijnt
 
-8️⃣ Wat hebben we technisch gerealiseerd?
+---
 
-✔️ Eigen webinterface geïntegreerd in Home Assistant
+## 8️⃣ Wat hebben we technisch gerealiseerd?
 
-✔️ Volledig lokale communicatie
+- ✔️ Eigen webinterface geïntegreerd in Home Assistant
+- ✔️ Volledig lokale communicatie
+- ✔️ Automatische tokenvernieuwing
+- ✔️ Werkende REST API
+- ✔️ Service calls vanuit custom frontend
 
-✔️ Automatische tokenvernieuwing
+**Dit is de basis voor:**
 
-✔️ Werkende REST API
+- Webdashboard per kamer
+- Statusmonitoring
+- Scenario simulaties
+- Integratie met Zigbee knoppen
+- Integratie met WLED statuslampen
 
-✔️ Service calls vanuit custom frontend
+---
 
-Dit is de basis voor:
-
-Webdashboard per kamer
-
-Statusmonitoring
-
-Scenario simulaties
-
-Integratie met Zigbee knoppen
-
-Integratie met WLED statuslampen
-
-🔐 Beveiligingsopmerking
+## 🔐 Beveiligingsopmerking
 
 Deze methode werkt zolang:
 
-De gebruiker ingelogd is in dezelfde browser
+- De gebruiker ingelogd is in dezelfde browser
+- De pagina via `/local/` wordt gehost
 
-De pagina via /local/ wordt gehost
+**Voor productieomgevingen kan later worden uitgebreid met:**
 
-Voor productieomgevingen kan later worden uitgebreid met:
+- Server-side proxy
+- OAuth flow
+- Reverse proxy authenticatie
+- API rate limiting
 
-Server-side proxy
+---
 
-OAuth flow
+## 🚀 Volgende uitbreidingen
 
-Reverse proxy authenticatie
-
-API rate limiting
-
-🚀 Volgende uitbreidingen
-
-Knoppen voor light.turn_on
-
-Realtime status via WebSocket API
-
-Kamer-overzicht dashboard
-
-Urgentie-kleuren automatisch aanpassen
-
-Logging van oproepen in database
+- Knoppen voor `light.turn_on`
+- Realtime status via WebSocket API
+- Kamer-overzicht dashboard
+- Urgentie-kleuren automatisch aanpassen
+- Logging van oproepen in database
