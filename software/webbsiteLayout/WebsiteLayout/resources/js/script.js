@@ -1,5 +1,57 @@
 window.addEventListener("DOMContentLoaded", () => {
 
+    // =========================
+    // Status Toggle Functionaliteit
+    // =========================
+    const statusToggleBtn = document.getElementById("statusToggleBtn");
+    const statusText = document.getElementById("statusText");
+    const TOGGLE_STORAGE_KEY = "simlab_status_toggle";
+
+    // Load saved toggle state
+    function loadToggleState() {
+        const saved = localStorage.getItem(TOGGLE_STORAGE_KEY);
+        return saved === "busy";
+    }
+
+    // Save toggle state
+    function saveToggleState(isBusy) {
+        localStorage.setItem(TOGGLE_STORAGE_KEY, isBusy ? "busy" : "ready");
+    }
+
+    // Update UI based on toggle state
+    function updateToggleUI(isBusy) {
+        if (isBusy) {
+            document.body.classList.add("status-busy");
+            document.body.classList.remove("status-ready");
+            statusToggleBtn.classList.add("busy");
+            statusToggleBtn.textContent = "Collega Klaar";
+            statusText.textContent = "Status: Collega Aanwezig (Rood)";
+        } else {
+            document.body.classList.add("status-ready");
+            document.body.classList.remove("status-busy");
+            statusToggleBtn.classList.remove("busy");
+            statusToggleBtn.textContent = "Collega Aanwezig";
+            statusText.textContent = "Status: Klaar (Groen)";
+        }
+    }
+
+    // Initialize toggle state
+    let isColleagueBusy = loadToggleState();
+    updateToggleUI(isColleagueBusy);
+
+    // Button click handler
+    if (statusToggleBtn) {
+        statusToggleBtn.addEventListener("click", () => {
+            isColleagueBusy = !isColleagueBusy;
+            updateToggleUI(isColleagueBusy);
+            saveToggleState(isColleagueBusy);
+        });
+    }
+
+    // =========================
+    // Home Assistant Integratie
+    // =========================
+
     // Home Assistant entity die verandert bij knopdruk (via automation)
     const WATCH_ENTITY_ID = "input_text.last_button_press";
 
