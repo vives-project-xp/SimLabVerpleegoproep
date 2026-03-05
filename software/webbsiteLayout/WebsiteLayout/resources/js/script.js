@@ -18,33 +18,35 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(TOGGLE_STORAGE_KEY, isBusy ? "busy" : "ready");
     }
 
-    // Update UI based on toggle state
-    function updateToggleUI(isBusy) {
-        if (isBusy) {
-            document.body.classList.add("status-busy");
-            document.body.classList.remove("status-ready");
-            statusToggleBtn.classList.add("busy");
-            statusToggleBtn.textContent = "Collega Klaar";
-            statusText.textContent = "Status: Collega Aanwezig (Rood)";
-        } else {
-            document.body.classList.add("status-ready");
-            document.body.classList.remove("status-busy");
-            statusToggleBtn.classList.remove("busy");
-            statusToggleBtn.textContent = "Collega Aanwezig";
-            statusText.textContent = "Status: Klaar (Groen)";
-        }
+    // Reset naar "Geen melding" status
+    function resetToNormal() {
+        const room1Card = document.getElementById("room1Card");
+        const room1Status = document.getElementById("room1Status");
+        const room1StateLabel = document.getElementById("room1StateLabel");
+        
+        // Reset naar groen
+        room1Card.classList.remove("busy", "alert");
+        room1Card.classList.add("free");
+        room1Status.innerHTML = `<i class="fa-solid fa-circle-check" style="color: rgb(6, 158, 16);"></i> Geen melding`;
+        if (room1StateLabel) room1StateLabel.textContent = "Geen melding";
+        
+        statusToggleBtn.textContent = "Reset naar Geen Melding";
+        statusText.textContent = "Klik om terug te zetten naar normale status";
     }
 
-    // Initialize toggle state
-    let isColleagueBusy = loadToggleState();
-    updateToggleUI(isColleagueBusy);
+    // Initialize - altijd starten met normale status
+    resetToNormal();
 
-    // Button click handler
+    // Website button - reset altijd terug naar "Geen melding"
     if (statusToggleBtn) {
         statusToggleBtn.addEventListener("click", () => {
-            isColleagueBusy = !isColleagueBusy;
-            updateToggleUI(isColleagueBusy);
-            saveToggleState(isColleagueBusy);
+            resetToNormal();
+            // Update demo state ook naar 0
+            if (typeof demo !== 'undefined') {
+                demo.stateIndex = 0;
+                saveState(demo);
+            }
+            showToast("Status gereset naar: Geen melding");
         });
     }
 
@@ -52,8 +54,9 @@ window.addEventListener("DOMContentLoaded", () => {
     // Home Assistant Integratie
     // =========================
 
-    // Home Assistant entity die verandert bij knopdruk (via automation)
-    const WATCH_ENTITY_ID = "input_text.last_button_press";
+    // Home Assistant entities die veranderen bij knopdruk (via automation)
+    const WATCH_ENTITY_HELP = "input_text.last_button_press";        // Korte klik
+    const WATCH_ENTITY_COLLEAGUE = "input_text.colleague_present";   // Lange klik
 
     // UI elements
     const toast = document.getElementById("toast");
@@ -226,7 +229,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (msg.type === "event" && msg.event?.event_type === "state_changed") {
                 const e = msg.event.data;
-                if (e.entity_id !== WATCH_ENTITY_ID) return;
+                const entityId = e.entity_id;
+                
+                // Check welke knop gedrukt is
+                if (entityId !== WATCH_ENTITY_HELP && entityId !== WATCH_ENTITY_COLLEAGUE) return;
 
                 const newValue = e.new_state?.state;
 
@@ -234,12 +240,16 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (demo.lastSeenValue === newValue) return;
                 demo.lastSeenValue = newValue;
 
-                // Cycle state: Geen -> Collega -> Hulp -> Geen -> ...
-                demo.stateIndex = (demo.stateIndex + 1) % STATES.length;
-
-                // Update counters afhankelijk van nieuwe state
-                if (demo.stateIndex === 1) demo.colleagueCount += 1;
-                if (demo.stateIndex === 2) demo.helpCount += 1;
+                // Bepaal de status op basis van welke entity veranderd is
+                if (entityId === WATCH_ENTITY_HELP) {
+                    // Korte klik → Hulp gevraagd (state 2)
+                    demo.stateIndex = 2;
+                    demo.helpCount += 1;
+                } else if (entityId === WATCH_ENTITY_COLLEAGUE) {
+                    // Lange klik → Collega aanwezig (state 1)
+                    demo.stateIndex = 1;
+                    demo.colleagueCount += 1;
+                }
 
                 // Update UI
                 setRoom1State(demo.stateIndex);
