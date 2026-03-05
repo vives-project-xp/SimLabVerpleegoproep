@@ -129,9 +129,7 @@ img
     float: right;
 }
 
-/* =========================
-   Toast / Pushmelding styling
-   ========================= */
+
 
 .toast {
   position: fixed;
@@ -163,54 +161,4 @@ img
 
 .toast-msg {
   font-size: 14px;
-}
-
-.demo-small{
-  margin-top: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #555;
-}
-
-/* =========================
-   Status Toggle Button
-   ========================= */
-
-.toggle-container {
-  text-align: center;
-  margin: 20px auto;
-  padding: 20px;
-}
-
-.status-btn {
-  background: #4caf50;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-}
-
-.status-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-
-.status-btn:active {
-  transform: translateY(0);
-}
-
-.status-btn.busy {
-  background: #e53935;
-}
-
-.status-text {
-  margin-top: 15px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
 }

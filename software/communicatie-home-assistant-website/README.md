@@ -42,16 +42,16 @@ command: toggle
 
 Dit is onze trigger.
 
-## 2️⃣ Helper Entity Aanmaken
+## 2️⃣ Helper Entities Aanmaken
 
-We maken een interne status-entity die de website kan volgen.
+We maken 2 interne status-entities die de website volgt.
 
-- Instellingen → Apparaten & diensten → Helpers
+- Instellingen -> Apparaten & diensten -> Helpers
 - Type: Tekst (Input Text)
-- Naam: `last_button_press`
-- Entity ID: `input_text.last_button_press`
+- `input_text.last_button_press` (single click -> hulp gevraagd)
+- `input_text.colleague_present` (double click -> collega toggle)
 
-## 3️⃣ Automation Maken
+## 3️⃣ Automations Maken
 
 **Trigger:**
 
@@ -74,8 +74,13 @@ command: toggle
 {{ now().isoformat() }}
 ```
 
+Maak 2 varianten:
+
+- Single click automation -> update `input_text.last_button_press`
+- Double click automation -> update `input_text.colleague_present`
+
 **Resultaat:**
-Elke knopdruk update de helper met een nieuwe timestamp.
+Single click zet de website op rood. Double click toggelt oranje/groen.
 
 ## 4️⃣ Website Integratie
 
@@ -89,14 +94,13 @@ Bereikbaar via:
 
 ## 5️⃣ Authenticatie
 
-De website:
+De website gebruikt voor WebSocket auth (in volgorde):
 
-- Leest `hassTokens` uit `localStorage`
-- Gebruikt de `refresh_token`
-- Vraagt via `/auth/token` een nieuwe `access_token` op
-- Verbindt met `/api/websocket`
+- `window.HA_CONFIG.token`
+- `localStorage.hassTokens.access_token`
+- `localStorage.ha_token` (fallback)
 
-Er worden geen hardcoded API keys gebruikt.
+Advies: geen hardcoded token in `index.html` plaatsen.
 
 ## 6️⃣ Realtime WebSocket Flow
 
@@ -111,7 +115,8 @@ Na authenticatie:
 
 De website filtert vervolgens op:
 
-`input_text.last_button_press`
+- `input_text.last_button_press`
+- `input_text.colleague_present`
 
 Wanneer deze entity verandert:
 

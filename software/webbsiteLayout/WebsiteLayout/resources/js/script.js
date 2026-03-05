@@ -1,57 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
 
     // =========================
-    // Status Toggle Functionaliteit
-    // =========================
-    const statusToggleBtn = document.getElementById("statusToggleBtn");
-    const statusText = document.getElementById("statusText");
-    const TOGGLE_STORAGE_KEY = "simlab_status_toggle";
-
-    // Load saved toggle state
-    function loadToggleState() {
-        const saved = localStorage.getItem(TOGGLE_STORAGE_KEY);
-        return saved === "busy";
-    }
-
-    // Save toggle state
-    function saveToggleState(isBusy) {
-        localStorage.setItem(TOGGLE_STORAGE_KEY, isBusy ? "busy" : "ready");
-    }
-
-    // Reset naar "Geen melding" status
-    function resetToNormal() {
-        const room1Card = document.getElementById("room1Card");
-        const room1Status = document.getElementById("room1Status");
-        const room1StateLabel = document.getElementById("room1StateLabel");
-        
-        // Reset naar groen
-        room1Card.classList.remove("busy", "alert");
-        room1Card.classList.add("free");
-        room1Status.innerHTML = `<i class="fa-solid fa-circle-check" style="color: rgb(6, 158, 16);"></i> Geen melding`;
-        if (room1StateLabel) room1StateLabel.textContent = "Geen melding";
-        
-        statusToggleBtn.textContent = "Reset naar Geen Melding";
-        statusText.textContent = "Klik om terug te zetten naar normale status";
-    }
-
-    // Initialize - altijd starten met normale status
-    resetToNormal();
-
-    // Website button - reset altijd terug naar "Geen melding"
-    if (statusToggleBtn) {
-        statusToggleBtn.addEventListener("click", () => {
-            resetToNormal();
-            // Update demo state ook naar 0
-            if (typeof demo !== 'undefined') {
-                demo.stateIndex = 0;
-                updateCountersUI(demo.stateIndex);
-                saveState(demo);
-            }
-            showToast("Status gereset naar: Geen melding");
-        });
-    }
-
-    // =========================
     // Home Assistant Integratie
     // =========================
 
@@ -69,9 +18,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const room1Card = document.getElementById("room1Card");
     const room1Status = document.getElementById("room1Status");
-    const room1StateLabel = document.getElementById("room1StateLabel");
 
-    // --- Demo state opslag (zodat refresh niet alles reset)
+    // --- Lokale state opslag (zodat refresh niet alles reset)
     const STORAGE_KEY = "simlab_demo_state_v1";
 
     // States: 0=geen, 1=collega, 2=hulp
@@ -101,19 +49,19 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!raw) {
             return {
                 stateIndex: 0,
-                lastSeenValue: null
+                lastSeenEventKey: null
             };
         }
         try {
             const obj = JSON.parse(raw);
             return {
                 stateIndex: Number.isInteger(obj.stateIndex) ? obj.stateIndex : 0,
-                lastSeenValue: obj.lastSeenValue ?? null
+                lastSeenEventKey: obj.lastSeenEventKey ?? null
             };
         } catch {
             return {
                 stateIndex: 0,
-                lastSeenValue: null
+                lastSeenEventKey: null
             };
         }
     }
@@ -138,9 +86,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // status line
         room1Status.innerHTML = st.html;
-
-        // small label
-        if (room1StateLabel) room1StateLabel.textContent = st.name;
     }
 
     function updateCountersUI(stateIndex) {
@@ -155,38 +100,42 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Home Assistant Auth helpers
-    function getTokens() {
-        const raw = localStorage.getItem("hassTokens");
-        if (!raw) return null;
-        try { return JSON.parse(raw); } catch { return null; }
-    }
-
-    async function getAccessToken() {
-        const tokens = getTokens();
-        if (!tokens || !tokens.refresh_token) {
-            throw new Error("Geen refresh_token gevonden. Log in op Home Assistant in dezelfde browser.");
+    function getToken() {
+        // Optioneel: server-side injectie
+        const injectedToken = window.HA_CONFIG?.token;
+        if (injectedToken) {
+            return injectedToken.trim();
         }
 
-        const form = new URLSearchParams();
-        form.set("grant_type", "refresh_token");
-        form.set("client_id", tokens.clientId || location.origin);
-        form.set("refresh_token", tokens.refresh_token);
+        // Home Assistant sessie token uit localStorage (indien de pagina binnen HA draait)
+        const hassTokensRaw = localStorage.getItem("hassTokens");
+        if (hassTokensRaw) {
+            try {
+                const hassTokens = JSON.parse(hassTokensRaw);
+                if (hassTokens?.access_token) {
+                    return hassTokens.access_token.trim();
+                }
+            } catch {
+                // Valt terug op ha_token als hassTokens geen geldige JSON bevat.
+            }
+        }
 
-        const res = await fetch("/auth/token", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: form.toString()
-        });
-
-        const text = await res.text();
-        if (!res.ok) throw new Error(`Token refresh failed (${res.status}): ${text}`);
-
-        const data = JSON.parse(text);
-        if (!data.access_token) throw new Error("Geen access_token in response.");
-        return data.access_token;
+        // Standaard: token uit localStorage
+        const token = localStorage.getItem("ha_token");
+        if (!token) {
+            throw new Error("Home Assistant token niet gevonden. Gebruik window.HA_CONFIG.token of localStorage 'hassTokens'/'ha_token'.");
+        }
+        return token.trim();
     }
 
     function wsUrl() {
+        // Optioneel: custom Home Assistant URL via window.HA_CONFIG.url
+        if (window.HA_CONFIG?.url) {
+            const baseUrl = window.HA_CONFIG.url;
+            return baseUrl.replace(/^http/, "ws") + "/api/websocket";
+        }
+
+        // Anders: current host
         const proto = location.protocol === "https:" ? "wss" : "ws";
         return `${proto}://${location.host}/api/websocket`;
     }
@@ -208,34 +157,69 @@ window.addEventListener("DOMContentLoaded", () => {
     updateCountersUI(demo.stateIndex);
 
     async function connectWebSocket() {
-        const token = await getAccessToken();
-        ws = new WebSocket(wsUrl());
+        let token;
+        try {
+            token = getToken();
+            console.log("✓ Token opgehaald:", token.substring(0, 20) + "...");
+        } catch (err) {
+            console.error("✗ Token error:", err.message);
+            showToast(`ERROR: ${err.message}`);
+            setTimeout(() => connectWebSocket().catch(console.error), 5000);
+            return;
+        }
+
+        const url = wsUrl();
+        console.log("Connecting to:", url);
+        
+        try {
+            ws = new WebSocket(url);
+        } catch (err) {
+            console.error("WebSocket creation failed:", err);
+            showToast(`WebSocket error: ${err.message}`);
+            return;
+        }
+
+        ws.onopen = () => {
+            console.log("✓ WebSocket connected!");
+            showToast("✓ Verbonden met Home Assistant");
+        };
 
         ws.onmessage = (event) => {
             const msg = JSON.parse(event.data);
+            console.log("Message received:", msg.type);
 
             if (msg.type === "auth_required") {
+                console.log("Authenticating...");
                 ws.send(JSON.stringify({ type: "auth", access_token: token }));
                 return;
             }
 
             if (msg.type === "auth_ok") {
+                console.log("✓ Authenticated!");
                 sendWS({ type: "subscribe_events", event_type: "state_changed" });
+                return;
+            }
+
+            if (msg.type === "auth_invalid") {
+                console.error("✗ Auth invalid - token is verkeerd!");
+                showToast("✗ Token is verkeerd of verlopen");
                 return;
             }
 
             if (msg.type === "event" && msg.event?.event_type === "state_changed") {
                 const e = msg.event.data;
                 const entityId = e.entity_id;
+                console.log("State changed:", entityId, "=", e.new_state?.state);
                 
                 // Check welke knop gedrukt is
                 if (entityId !== WATCH_ENTITY_HELP && entityId !== WATCH_ENTITY_COLLEAGUE) return;
 
                 const newValue = e.new_state?.state;
+                const eventKey = `${entityId}:${newValue}`;
 
                 // Extra bescherming: sommige systemen sturen soms dubbele events
-                if (demo.lastSeenValue === newValue) return;
-                demo.lastSeenValue = newValue;
+                if (demo.lastSeenEventKey === eventKey) return;
+                demo.lastSeenEventKey = eventKey;
 
                 // Bepaal de status op basis van welke entity veranderd is
                 if (entityId === WATCH_ENTITY_HELP) {
@@ -263,19 +247,25 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         ws.onerror = (err) => {
-            console.error("WebSocket error", err);
+            console.error("✗ WebSocket error:", err);
+            showToast("✗ Verbindingsfout");
         };
 
         ws.onclose = () => {
-            console.warn("WebSocket closed, retry in 3s...");
+            console.warn("WebSocket closed, reconnecting in 3s...");
+            showToast("Verbinding verbroken, opnieuw verbinden...");
             setTimeout(() => {
                 connectWebSocket().catch(console.error);
             }, 3000);
         };
     }
 
+    // Debug info at startup
+    console.log("Page loaded, checking config...");
+    console.log("window.HA_CONFIG:", window.HA_CONFIG);
+    
     connectWebSocket().catch((e) => {
-        console.error(e);
+        console.error("Fatal error:", e);
         showToast(`ERROR: ${e.message}`);
     });
 
