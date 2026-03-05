@@ -21,7 +21,7 @@ Pas vervolgens de volgende drie instellingen aan onder het **Tools** menu. Zonde
 
 ### A. Erase All Flash Before Sketch Upload: `Enabled`
 - **Wat het doet:** Wist het volledige flashgeheugen voordat de nieuwe code wordt geüpload.
-- **Waarom:** Dit verwijdert eventuele oude code of achtergebleven Zigbee-netwerkgegevens. Als je dit niet doet, kan Home Assistant vaak moeite hebben om het apparaat te herkennen of te pairen. *(Tip: zet dit na de eerste succesvolle upload weer uit, anders moet je hem telkens opnieuw pairen).*
+- **Waarom:** Dit verwijdert eventuele oude code of achtergebleven Zigbee-netwerkgegevens. Als je dit niet doet, kan Home Assistant vaak moeite hebben om het apparaat te herkennen of te pairen. (Tip: zet dit na de eerste succesvolle upload weer uit, anders moet je hem telkens opnieuw pairen).
 
 ### B. Partition Scheme: `Zigbee 4MB with spiffs`
 - **Wat het doet:** Deelt het geheugen van de ESP32 op een specifieke manier in.
