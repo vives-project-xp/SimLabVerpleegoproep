@@ -44,6 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
             // Update demo state ook naar 0
             if (typeof demo !== 'undefined') {
                 demo.stateIndex = 0;
+                updateCountersUI(demo.stateIndex);
                 saveState(demo);
             }
             showToast("Status gereset naar: Geen melding");
@@ -100,9 +101,6 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!raw) {
             return {
                 stateIndex: 0,
-                helpCount: 0,
-                colleagueCount: 0,
-                lowBatCount: 0,
                 lastSeenValue: null
             };
         }
@@ -110,17 +108,11 @@ window.addEventListener("DOMContentLoaded", () => {
             const obj = JSON.parse(raw);
             return {
                 stateIndex: Number.isInteger(obj.stateIndex) ? obj.stateIndex : 0,
-                helpCount: Number.isInteger(obj.helpCount) ? obj.helpCount : 0,
-                colleagueCount: Number.isInteger(obj.colleagueCount) ? obj.colleagueCount : 0,
-                lowBatCount: Number.isInteger(obj.lowBatCount) ? obj.lowBatCount : 0,
                 lastSeenValue: obj.lastSeenValue ?? null
             };
         } catch {
             return {
                 stateIndex: 0,
-                helpCount: 0,
-                colleagueCount: 0,
-                lowBatCount: 0,
                 lastSeenValue: null
             };
         }
@@ -151,10 +143,15 @@ window.addEventListener("DOMContentLoaded", () => {
         if (room1StateLabel) room1StateLabel.textContent = st.name;
     }
 
-    function updateCountersUI(s) {
-        if (countHelp) countHelp.textContent = String(s.helpCount);
-        if (countColleague) countColleague.textContent = String(s.colleagueCount);
-        if (countLowBat) countLowBat.textContent = String(s.lowBatCount);
+    function updateCountersUI(stateIndex) {
+        // Tellers tonen hoeveel kamers in elke status zijn (nu alleen kamer 1)
+        const helpCount = (stateIndex === 2) ? 1 : 0;      // Hulp gevraagd
+        const colleagueCount = (stateIndex === 1) ? 1 : 0; // Collega aanwezig
+        const lowBatCount = 0; // Voor later
+        
+        if (countHelp) countHelp.textContent = String(helpCount);
+        if (countColleague) countColleague.textContent = String(colleagueCount);
+        if (countLowBat) countLowBat.textContent = String(lowBatCount);
     }
 
     // --- Home Assistant Auth helpers
@@ -208,7 +205,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Init UI on load
     setRoom1State(demo.stateIndex);
-    updateCountersUI(demo);
+    updateCountersUI(demo.stateIndex);
 
     async function connectWebSocket() {
         const token = await getAccessToken();
@@ -242,18 +239,20 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 // Bepaal de status op basis van welke entity veranderd is
                 if (entityId === WATCH_ENTITY_HELP) {
-                    // Korte klik → Hulp gevraagd (state 2)
+                    // Korte klik → Altijd naar "Hulp gevraagd" (state 2)
                     demo.stateIndex = 2;
-                    demo.helpCount += 1;
                 } else if (entityId === WATCH_ENTITY_COLLEAGUE) {
-                    // Lange klik → Collega aanwezig (state 1)
-                    demo.stateIndex = 1;
-                    demo.colleagueCount += 1;
+                    // Lange klik → Toggle tussen "Collega aanwezig" (1) en "Geen melding" (0)
+                    if (demo.stateIndex === 1) {
+                        demo.stateIndex = 0; // Van collega → geen melding
+                    } else {
+                        demo.stateIndex = 1; // Van elke andere status → collega aanwezig
+                    }
                 }
 
                 // Update UI
                 setRoom1State(demo.stateIndex);
-                updateCountersUI(demo);
+                updateCountersUI(demo.stateIndex);
 
                 // Toast
                 showToast(STATES[demo.stateIndex].toast);
