@@ -9,14 +9,24 @@
     <meta name="author" content="Cobe Dudal">
     <title>Oproepsysteem</title>
 
-    <script defer src="./resources/js/script.js"></script>
-    <link rel="stylesheet" href="./resources/css/stylesheet.css">
+    <!-- Home Assistant local paths -->
+    <script defer src="/local/testsite/resources/js/script.js"></script>
+    <link rel="stylesheet" href="/local/testsite/resources/css/stylesheet.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 
 <body>
+    <!-- Toast / Pushmelding -->
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true">
+        <div class="toast-inner">
+            <div class="toast-title">📣 Oproep ontvangen</div>
+            <div id="toastMsg" class="toast-msg">Knop ingedrukt.</div>
+        </div>
+    </div>
+
     <div class="header-block">
-        <img src="./resources/images/logo.svg" alt="Vives logo">
+        <img src="/local/testsite/resources/images/logo.svg" alt="Vives logo">
         <h1 class="header-block">Ziekenhuis monitor</h1>
         <p>Kamer status dashboard</p>
     </div><br>
@@ -27,17 +37,31 @@
                 <th>Hulp gevraagd</th><th>Collega aanwezig</th><th>Lage batterij</th>
             </tr>
             <tr>
-                <td>1</td><td>1</td><td>1</td>
+                <td id="countHelp">0</td>
+                <td id="countColleague">0</td>
+                <td id="countLowBat">0</td>
             </tr>
         </table>
     </div>
 
     <div class="card-container">
-        <div class="card free">
+        <!-- KAMER 01: dit is de demo kamer die we live updaten -->
+        <div id="room1Card" class="card free">
             <p class="battery"><i class="fa-solid fa-battery-full"></i> 100%</p>
             <p class="room-name">Kamer 01</p>
-            <p><i class="fa-solid fa-circle-check" style="color: rgb(6, 158, 16);"></i> Geen melding</p>
+
+            <!-- Statusregel wordt door JS aangepast -->
+            <p id="room1Status">
+                <i class="fa-solid fa-circle-check" style="color: rgb(6, 158, 16);"></i> Geen melding
+            </p>
+
+            <!-- Optioneel: toon huidige demo status -->
+            <p class="demo-small">
+                Demo status: <span id="room1StateLabel">Geen melding</span>
+            </p>
         </div>
+
+        <!-- Deze blijven voorlopig statisch (later kan je die ook dynamisch maken) -->
         <div class="card busy">
             <p class="battery"><i class="fa-solid fa-battery-three-quarters"></i> 75%</p>
             <p class="room-name">Kamer 02</p>

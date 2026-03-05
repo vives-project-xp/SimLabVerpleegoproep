@@ -11,16 +11,15 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video
-    {
+{
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-    }
+}
 /* Dit is de full reset */
-
 
 body 
 {
@@ -76,10 +75,10 @@ p.overview
 }
 
 img
-   {
+{
     width: 100%;
     max-width: 80px;
-   }
+}
 
 .card-container 
 {
@@ -130,7 +129,45 @@ img
     float: right;
 }
 
+/* =========================
+   Toast / Pushmelding styling
+   ========================= */
 
+.toast {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: none;
+  min-width: 280px;
+  max-width: 520px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #ffffff;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+}
 
+.toast.show {
+  display: block;
+}
 
+.toast-inner {
+  padding: 14px 16px;
+}
 
+.toast-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.toast-msg {
+  font-size: 14px;
+}
+
+.demo-small{
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
