@@ -4,7 +4,7 @@ Deze handleiding beschrijft hoe onze webinterface realtime communiceert met Home
 
 De volledige communicatie verloopt lokaal via de Raspberry Pi.
 
-## 🏗 Architectuur Overzicht
+## Architectuur Overzicht
 
 ```text
 Zigbee Button
@@ -25,7 +25,7 @@ Website toont melding (realtime)
 **Belangrijk:**
 De communicatie is event-driven en niet polling-based.
 
-## 1️⃣ Zigbee Knop Event Detecteren
+## 1 Zigbee Knop Event Detecteren
 
 In Home Assistant:
 
@@ -42,7 +42,7 @@ command: toggle
 
 Dit is onze trigger.
 
-## 2️⃣ Helper Entities Aanmaken
+## 2 Helper Entities Aanmaken
 
 We maken 2 interne status-entities die de website volgt.
 
@@ -51,7 +51,7 @@ We maken 2 interne status-entities die de website volgt.
 - `input_text.last_button_press` (single click -> hulp gevraagd)
 - `input_text.colleague_present` (double click -> collega toggle)
 
-## 3️⃣ Automations Maken
+## 3 Automations Maken
 
 **Trigger:**
 
@@ -82,7 +82,7 @@ Maak 2 varianten:
 **Resultaat:**
 Single click zet de website op rood. Double click toggelt oranje/groen.
 
-## 4️⃣ Website Integratie
+## 4 Website Integratie
 
 De website wordt gehost via:
 
@@ -92,7 +92,7 @@ Bereikbaar via:
 
 `http://<IP>:8123/local/testsite/index.html`
 
-## 5️⃣ Authenticatie
+## 5 Authenticatie
 
 De website gebruikt voor WebSocket auth (in volgorde):
 
@@ -102,7 +102,7 @@ De website gebruikt voor WebSocket auth (in volgorde):
 
 Advies: geen hardcoded token in `index.html` plaatsen.
 
-## 6️⃣ Realtime WebSocket Flow
+## 6 Realtime WebSocket Flow
 
 Na authenticatie:
 
@@ -123,23 +123,23 @@ Wanneer deze entity verandert:
 - De website ontvangt een `state_changed` event
 - Een visuele melding (toast) wordt getoond
 
-## 7️⃣ Waarom deze architectuur?
+## 7 Waarom deze architectuur?
 
-- ✅ Volledig lokaal
-- ✅ Realtime
-- ✅ Geen polling
-- ✅ Geen hardcoded tokens
-- ✅ Schaalbaar naar meerdere kamers
-- ✅ Event-driven design
+- √ Volledig lokaal
+- √ Realtime
+- √ Geen polling
+- √ Geen hardcoded tokens
+- √ Schaalbaar naar meerdere kamers
+- √ Event-driven design
 
-## 🔐 Beveiliging
+## Beveiliging
 
 - Website draait binnen Home Assistant (`/local/`)
 - Authenticatie via bestaande HA sessie
 - OAuth token flow
 - Geen externe API exposure
 
-## 🚀 Uitbreidbaar naar
+## Uitbreidbaar naar
 
 - Meerdere kamers
 - Urgentie levels (normaal / hoog)
