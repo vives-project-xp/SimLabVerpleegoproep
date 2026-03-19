@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // =========================
     // Version & Debug Info
     // =========================
-    const SCRIPT_VERSION = "20260305-002";
+    const SCRIPT_VERSION = "20260312-001";
     console.log("========================================");
     console.log(`🚀 SimLab Script v${SCRIPT_VERSION} geladen`);
     console.log("========================================");
@@ -115,39 +115,199 @@ window.addEventListener("DOMContentLoaded", () => {
         if (countLowBat) countLowBat.textContent = String(lowBatCount);
     }
 
-    // --- Home Assistant Auth helpers
-    function getToken() {
-        // Optioneel: server-side injectie
-        const injectedToken = window.HA_CONFIG?.token;
-        if (injectedToken) {
-            return injectedToken.trim();
-        }
+    function applyState(index, showNotification = false) {
+        demo.stateIndex = index;
+        setRoom1State(demo.stateIndex);
+        updateCountersUI(demo.stateIndex);
+        saveState(demo);
 
-        // Home Assistant sessie token uit localStorage (indien de pagina binnen HA draait)
-        const hassTokensRaw = localStorage.getItem("hassTokens");
-        if (hassTokensRaw) {
-            try {
-                const hassTokens = JSON.parse(hassTokensRaw);
-                if (hassTokens?.access_token) {
-                    return hassTokens.access_token.trim();
-                }
-            } catch {
-                // Valt terug op ha_token als hassTokens geen geldige JSON bevat.
-            }
+        if (showNotification) {
+            showToast(STATES[demo.stateIndex].toast);
         }
-
-        // Standaard: token uit localStorage
-        const token = localStorage.getItem("ha_token");
-        if (!token) {
-            throw new Error("Home Assistant token niet gevonden. Gebruik window.HA_CONFIG.token of localStorage 'hassTokens'/'ha_token'.");
-        }
-        return token.trim();
     }
 
-    function wsUrl() {
-        // Optioneel: custom Home Assistant URL via window.HA_CONFIG.url
-        if (window.HA_CONFIG?.url) {
-            const baseUrl = window.HA_CONFIG.url;
+    function parseExplicitColleagueState(value) {
+        if (typeof value !== "string") {
+            return null;
+        }
+
+        const normalized = value.toLowerCase();
+        if (normalized.includes("present") || normalized === "on" || normalized === "true") {
+            return true;
+        }
+
+        if (normalized.includes("absent") || normalized === "off" || normalized === "false") {
+            return false;
+        }
+
+        return null;
+    }
+
+    function toggleColleaguePresence() {
+        demo.stateIndex = (demo.stateIndex === 1) ? 0 : 1;
+    }
+
+    // --- Home Assistant Auth helpers
+    function parseStoredJson(storage, key) {
+        const raw = storage.getItem(key);
+        if (!raw) {
+            return null;
+        }
+
+        try {
+            return JSON.parse(raw);
+        } catch {
+            return null;
+        }
+    }
+
+    function buildAuthContext(data, source) {
+        if (!data?.accessToken) {
+            return null;
+        }
+
+        return {
+            accessToken: data.accessToken.trim(),
+            refreshToken: data.refreshToken?.trim() || null,
+            expires: Number(data.expires) || null,
+            hassUrl: data.hassUrl?.trim() || location.origin,
+            clientId: data.clientId?.trim() || `${location.origin}/`,
+            source
+        };
+    }
+
+    function getAuthContext() {
+        const injectedConfig = window.HA_CONFIG;
+        if (injectedConfig?.token) {
+            return buildAuthContext({
+                accessToken: injectedConfig.token,
+                refreshToken: injectedConfig.refresh_token,
+                expires: injectedConfig.expires,
+                hassUrl: injectedConfig.url,
+                clientId: injectedConfig.clientId
+            }, "window.HA_CONFIG");
+        }
+
+        const localSession = parseStoredJson(localStorage, "hassTokens");
+        if (localSession?.access_token) {
+            return buildAuthContext({
+                accessToken: localSession.access_token,
+                refreshToken: localSession.refresh_token,
+                expires: localSession.expires,
+                hassUrl: localSession.hassUrl,
+                clientId: localSession.clientId
+            }, "localStorage.hassTokens");
+        }
+
+        const sessionSession = parseStoredJson(sessionStorage, "hassTokens");
+        if (sessionSession?.access_token) {
+            return buildAuthContext({
+                accessToken: sessionSession.access_token,
+                refreshToken: sessionSession.refresh_token,
+                expires: sessionSession.expires,
+                hassUrl: sessionSession.hassUrl,
+                clientId: sessionSession.clientId
+            }, "sessionStorage.hassTokens");
+        }
+
+        const token = localStorage.getItem("ha_token");
+        if (token?.trim()) {
+            return buildAuthContext({
+                accessToken: token,
+                hassUrl: window.HA_CONFIG?.url || location.origin,
+                clientId: `${location.origin}/`
+            }, "localStorage.ha_token");
+        }
+
+        throw new Error("Home Assistant token niet gevonden. Gebruik hassTokens uit de browserconsole of localStorage 'ha_token'.");
+    }
+
+    function isAccessTokenExpired(auth) {
+        if (!auth?.expires) {
+            return false;
+        }
+
+        return Date.now() >= (auth.expires - 60 * 1000);
+    }
+
+    function saveSessionTokens(auth, expiresInSeconds) {
+        if (!auth?.refreshToken) {
+            return;
+        }
+
+        const storedSession = {
+            access_token: auth.accessToken,
+            token_type: "Bearer",
+            expires_in: expiresInSeconds,
+            hassUrl: auth.hassUrl,
+            clientId: auth.clientId,
+            expires: auth.expires,
+            refresh_token: auth.refreshToken
+        };
+
+        if (auth.source === "localStorage.hassTokens") {
+            localStorage.setItem("hassTokens", JSON.stringify(storedSession));
+        }
+
+        if (auth.source === "sessionStorage.hassTokens") {
+            sessionStorage.setItem("hassTokens", JSON.stringify(storedSession));
+        }
+    }
+
+    async function refreshAccessToken(auth) {
+        if (!auth?.refreshToken) {
+            throw new Error("Geen refresh token beschikbaar.");
+        }
+
+        const tokenEndpoint = `${auth.hassUrl.replace(/\/$/, "")}/auth/token`;
+        const body = new URLSearchParams({
+            grant_type: "refresh_token",
+            client_id: auth.clientId,
+            refresh_token: auth.refreshToken
+        });
+
+        const response = await fetch(tokenEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body
+        });
+
+        if (!response.ok) {
+            throw new Error(`Token refresh mislukt (${response.status} ${response.statusText})`);
+        }
+
+        const refreshed = await response.json();
+        const expiresInSeconds = Number(refreshed.expires_in) || 1800;
+        const nextAuth = {
+            ...auth,
+            accessToken: refreshed.access_token.trim(),
+            refreshToken: refreshed.refresh_token?.trim() || auth.refreshToken,
+            expires: Date.now() + (expiresInSeconds * 1000),
+            source: auth.source
+        };
+
+        saveSessionTokens(nextAuth, expiresInSeconds);
+        return nextAuth;
+    }
+
+    async function getValidAuthContext() {
+        let auth = currentAuth || getAuthContext();
+
+        if (isAccessTokenExpired(auth) && auth.refreshToken) {
+            console.log("🔄 Access token verlopen, vernieuwen via refresh token...");
+            auth = await refreshAccessToken(auth);
+        }
+
+        return auth;
+    }
+
+    function wsUrl(auth) {
+        const configuredUrl = auth?.hassUrl || window.HA_CONFIG?.url;
+
+        if (configuredUrl) {
+            const baseUrl = configuredUrl;
             return baseUrl.replace(/^http/, "ws") + "/api/websocket";
         }
 
@@ -158,6 +318,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     let ws = null;
     let msgId = 1;
+    let reconnectEnabled = true;
+    let suppressNextReconnect = false;
+    let currentAuth = null;
 
     function sendWS(obj) {
         obj.id = msgId++;
@@ -165,8 +328,30 @@ window.addEventListener("DOMContentLoaded", () => {
         return obj.id;
     }
 
+    function scheduleReconnect(delayMs = 3000) {
+        if (!reconnectEnabled) {
+            return;
+        }
+
+        setTimeout(() => {
+            connectWebSocket().catch(console.error);
+        }, delayMs);
+    }
+
+    function closeSocketWithoutReconnect() {
+        if (!ws) {
+            return;
+        }
+
+        if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
+            suppressNextReconnect = true;
+            ws.close();
+        }
+    }
+
     // --- MAIN demo logic on event
     let demo = loadState();
+    applyState(demo.stateIndex);
 
     // Functie om huidige entity states op te halen en initiele UI te bepalen
     async function fetchInitialState(token) {
@@ -188,7 +373,7 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log("   Colleague response status:", colleagueRes.status, colleagueRes.statusText);
 
             if (!helpRes.ok || !colleagueRes.ok) {
-                console.warn(" Kon entities niet ophalen, gebruik lokale state");
+                console.warn("⚠️ Kon entities niet ophalen, gebruik lokale state");
                 setRoom1State(demo.stateIndex);
                 updateCountersUI(demo.stateIndex);
                 return;
@@ -216,27 +401,18 @@ window.addEventListener("DOMContentLoaded", () => {
                 demo.stateIndex = 2;
             } else if (colleagueTime > helpTime) {
                 // Colleague is het laatst gewijzigd
-                // Parse de value: als het een getal is, gebruik modulo 2 voor toggle
-                // Anders zoek naar keywords als "present" of een teller
-                let isPresent = false;
-                
-                if (colleagueValue.includes("present") || colleagueValue.includes("1")) {
-                    isPresent = true;
-                } else if (colleagueValue.includes("absent") || colleagueValue.includes("0")) {
-                    isPresent = false;
-                } else {
-                    // Gebruik timestamp modulo 2
-                    const numValue = parseFloat(colleagueValue) || 0;
-                    const counter = Math.floor(numValue);
-                    isPresent = (counter % 2) === 1; // Oneven = present
-                }
-                
-                if (isPresent) {
+                const explicitState = parseExplicitColleagueState(colleagueValue);
+
+                if (explicitState === true) {
                     console.log("   ➡️ Colleague aanwezig -> ORANJE");
                     demo.stateIndex = 1;
-                } else {
+                } else if (explicitState === false) {
                     console.log("   ➡️ Geen melding -> GROEN");
                     demo.stateIndex = 0;
+                } else {
+                    // Voor numerieke/timestamp waarden: gebruik vorige lokale status als basis.
+                    toggleColleaguePresence();
+                    console.log("   ➡️ Colleague event zonder expliciete status -> TOGGLE");
                 }
             } else {
                 // Beide gelijk of onbekend -> default groen
@@ -245,36 +421,35 @@ window.addEventListener("DOMContentLoaded", () => {
             }
 
             // Update UI met de opgehaalde state
-            setRoom1State(demo.stateIndex);
-            updateCountersUI(demo.stateIndex);
-            saveState(demo);
+            applyState(demo.stateIndex);
             
             console.log(`   ✅ Initiele status: ${STATES[demo.stateIndex].name}`);
         } catch (err) {
             console.warn("⚠️ Fout bij ophalen states:", err.message);
             // Fallback naar lokale state
-            setRoom1State(demo.stateIndex);
-            updateCountersUI(demo.stateIndex);
+            applyState(demo.stateIndex);
         }
     }
 
     async function connectWebSocket() {
         console.log("🔌 Starting WebSocket connection...");
         
-        let token;
+        let auth;
         try {
-            token = getToken();
-            console.log("✓ Token opgehaald:", token.substring(0, 20) + "...");
-            console.log("   Token length:", token.length);
+            reconnectEnabled = true;
+            auth = await getValidAuthContext();
+            currentAuth = auth;
+            console.log("✓ Token opgehaald uit:", auth.source);
+            console.log("   Token prefix:", auth.accessToken.substring(0, 20) + "...");
+            console.log("   Token length:", auth.accessToken.length);
         } catch (err) {
-            console.error("✗ Token error:", err.message);
-            console.error("   Stack:", err.stack);
-            showToast(`ERROR: ${err.message}`);
-            setTimeout(() => connectWebSocket().catch(console.error), 5000);
+            reconnectEnabled = false;
+            console.warn("ℹ️ Home Assistant niet beschikbaar, demo mode actief:", err.message);
+            showToast("Demo mode actief.");
             return;
         }
 
-        const url = wsUrl();
+        const url = wsUrl(auth);
         console.log("🌐 WebSocket URL:", url);
         
         try {
@@ -299,7 +474,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (msg.type === "auth_required") {
                 console.log("🔐 Authenticating...");
-                ws.send(JSON.stringify({ type: "auth", access_token: token }));
+                ws.send(JSON.stringify({ type: "auth", access_token: auth.accessToken }));
                 return;
             }
 
@@ -307,7 +482,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 console.log("✓✓✓ Authenticated! ✓✓✓");
                 
                 // Haal eerst de huidige state op voordat we events gaan luisteren
-                fetchInitialState(token).then(() => {
+                fetchInitialState(auth.accessToken).then(() => {
                     // Nu pas subscriben op events
                     sendWS({ type: "subscribe_events", event_type: "state_changed" });
                     console.log("✓ Geabonneerd op state_changed events");
@@ -323,7 +498,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (msg.type === "auth_invalid") {
                 console.error("✗✗✗ Auth invalid - token is verkeerd! ✗✗✗");
+                if (currentAuth?.refreshToken) {
+                    console.warn("🔄 Access token geweigerd, probeer refresh token...");
+                    showToast("HA token verlopen, vernieuwen...");
+                    refreshAccessToken(currentAuth).then((refreshedAuth) => {
+                        currentAuth = refreshedAuth;
+                        closeSocketWithoutReconnect();
+                        connectWebSocket().catch(console.error);
+                    }).catch((refreshError) => {
+                        reconnectEnabled = false;
+                        console.error("✗ Token refresh mislukt:", refreshError.message);
+                        showToast("✗ HA login mislukt, demo mode actief");
+                        closeSocketWithoutReconnect();
+                    });
+                    return;
+                }
+
+                reconnectEnabled = false;
                 showToast("✗ Token is verkeerd of verlopen");
+                closeSocketWithoutReconnect();
                 return;
             }
 
@@ -385,41 +578,26 @@ window.addEventListener("DOMContentLoaded", () => {
                     console.log("   ➡️ Single click gedetecteerd → ROOD (hulp gevraagd)");
                     demo.stateIndex = 2;
                 } else if (entityId === WATCH_ENTITY_COLLEAGUE) {
-                    // Double click → Bepaal op basis van entity value (consistent over devices)
-                    let isPresent = false;
-                    
-                    if (newValue.includes("present") || newValue.includes("1")) {
-                        isPresent = true;
-                    } else if (newValue.includes("absent") || newValue.includes("0")) {
-                        isPresent = false;
-                    } else {
-                        // Gebruik timestamp modulo 2
-                        const numValue = parseFloat(newValue) || 0;
-                        const counter = Math.floor(numValue);
-                        isPresent = (counter % 2) === 1; // Oneven = present
-                    }
+                    // Double click: expliciete values respecteren, anders toggle per event.
+                    const explicitState = parseExplicitColleagueState(newValue);
                     
                     // Sla laatste value op
                     localStorage.setItem(COLLEAGUE_TOGGLE_KEY, newValue);
                     
-                    if (isPresent) {
+                    if (explicitState === true) {
                         console.log("   ➡️ Double click → ORANJE (collega aanwezig)");
                         demo.stateIndex = 1;
-                    } else {
+                    } else if (explicitState === false) {
                         console.log("   ➡️ Double click → GROEN (geen melding)");
                         demo.stateIndex = 0;
+                    } else {
+                        toggleColleaguePresence();
+                        console.log("   ➡️ Double click timestamp-event → TOGGLE");
                     }
                 }
 
                 // Update UI
-                setRoom1State(demo.stateIndex);
-                updateCountersUI(demo.stateIndex);
-
-                // Toast
-                showToast(STATES[demo.stateIndex].toast);
-
-                // Save
-                saveState(demo);
+                applyState(demo.stateIndex, true);
                 
                 console.log(`   ✅ Status bijgewerkt naar: ${STATES[demo.stateIndex].name}`);
             }
@@ -431,11 +609,19 @@ window.addEventListener("DOMContentLoaded", () => {
         };
 
         ws.onclose = () => {
+            if (suppressNextReconnect) {
+                suppressNextReconnect = false;
+                return;
+            }
+
+            if (!reconnectEnabled) {
+                console.warn("WebSocket closed, reconnect uitgeschakeld.");
+                return;
+            }
+
             console.warn("WebSocket closed, reconnecting in 3s...");
             showToast("Verbinding verbroken, opnieuw verbinden...");
-            setTimeout(() => {
-                connectWebSocket().catch(console.error);
-            }, 3000);
+            scheduleReconnect(3000);
         };
     }
 
