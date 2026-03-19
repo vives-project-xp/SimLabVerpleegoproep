@@ -171,7 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // Functie om huidige entity states op te halen en initiele UI te bepalen
     async function fetchInitialState(token) {
         try {
-            console.log("📥 Ophalen huidige entity states...");
+            console.log(" Ophalen huidige entity states...");
             console.log("   Token beschikbaar:", !!token);
             console.log("   Fetching:", `/api/states/${WATCH_ENTITY_HELP}`);
             console.log("   Fetching:", `/api/states/${WATCH_ENTITY_COLLEAGUE}`);
@@ -188,7 +188,7 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log("   Colleague response status:", colleagueRes.status, colleagueRes.statusText);
 
             if (!helpRes.ok || !colleagueRes.ok) {
-                console.warn("⚠️ Kon entities niet ophalen, gebruik lokale state");
+                console.warn(" Kon entities niet ophalen, gebruik lokale state");
                 setRoom1State(demo.stateIndex);
                 updateCountersUI(demo.stateIndex);
                 return;
