@@ -9,7 +9,7 @@
 #define ZIGBEE_LIGHT_ENDPOINT 10
 
 #define LED_PIN 2
-#define NUM_LEDS 5
+#define NUM_LEDS 12
 Adafruit_NeoPixel strip(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 uint8_t button = BOOT_PIN;
