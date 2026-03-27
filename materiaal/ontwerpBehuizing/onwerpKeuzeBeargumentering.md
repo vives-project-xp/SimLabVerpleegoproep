@@ -1,4 +1,4 @@
-# Beargumentatie ontwerp keuzes behuizing
+# **Beargumentatie ontwerp keuzes behuizing**
 
 # Inleiding
 
@@ -19,3 +19,7 @@ Een andere versie had dan weer de ESP32 bovenop de powerbank. Dit zou er wel voo
 We hielden er telkens rekening mee dat de interne componenten vlot bereikbaar moeten zijn.
 
 We zorgden er voor dat er openingen voorzien zijn om de power knop van de powerbank in te kunnen drukken en zodat de oplaad poort van de powerbank naar buiten kan gebracht worden, op deze manier moet de behuizing niet geopend worden om het op te laden
+
+## LED strip
+
+De LED strip wordt aan de binnenkant van de behuizing bevestigd. Door een plectieplaat te gebruiken als deksel, zullen de LED’s goed zichtbaar zijn. Er zijn dan ook gaten voorzien om deze plaat door te schuiven.
