@@ -23,10 +23,10 @@ Versie 2 was een ontwerp voor het visualiseren van een concept die we hadden. Bi
 #### Versie 3
 Versie 3 was de eerste versie waarvan we zeker genoeg waren om deze te 3D printen. Het ontwerp had de ESP32 boven de powerbank gelegen aan de bovenzijde gepositioneerd (gezien van bovenaf).
 We zagen echter een probleem die pas heel duidelijk werd bij het 3D printen van de behuizing, de manier waarop we het deksel inschuiven en uitschuiven.
-Bij het ontwerpen Leek deze methode stevig en betrouwbaar, dit was echter niet volledig zo. Door het 3D printen zelf is de onderkant van de opening om het deksel door te schuiven beginnen hangen. Dit zorgt ervoor dat de opening niet groot genoeg was. Een ander nadeel is dat de dikte van het stuk boven de opening niet dik genoeg was, dit zorgde ervoor dat dit stuk makkelijk heen en weer kon geplooid worden.
+Bij het ontwerpen leek deze methode stevig en betrouwbaar, dit was echter niet volledig zo. Door het 3D printen zelf is de onderkant van de opening om het deksel door te schuiven beginnen hangen. Dit zorgt ervoor dat de opening niet groot genoeg was. Een ander nadeel is dat de dikte van het stuk boven de opening niet dik genoeg was, dit zorgde ervoor dat dit stuk makkelijk heen en weer kon geplooid worden.
 
 #### Versie 4
-Versie 4 is het uiteindelijke ontwerp geworden. Deze versie lijkt zeer veel op versie 3 met een aantal kleine veranderingen. De grootste aanpassing is het systeem dat we gebruiken om de behuizing te openen.
+Versie 4 is het uiteindelijke ontwerp geworden. Deze versie lijkt zeer veel op versie 3 met een aantal kleine veranderingen. De grootste aanpassing is het systeem dat we gebruiken om de behuizing te openen. We hebben ook de afmetingen lichtjes verandert en een aantal voorzieningen toegevoegt.
 
 ### Belangrijke onderdelen
 -	Bevat kleine binnenmuren: Dit zorgt voor het in plaats houden van de losse componenten.
@@ -34,6 +34,7 @@ Versie 4 is het uiteindelijke ontwerp geworden. Deze versie lijkt zeer veel op v
 -	Bevat gaten voor riemen: Er zijn gaten voorzien om los liggende kabels vast te hangen met behulp van een spanband of riem.
 -	Bevat ventilatiegaten: Deze gaten zijn niet heel noodzakelijk omdat de componenten niet extreem warm worden, toch worden deze gebruikt vooral voor de ESP32 omdat deze wel wat warm wordt bij langdurig gebruik.
 -	Bevat schuifgleuven: Dit wordt gebruikt om het deksel in te schuiven.
+-	Bevat afrondingen om de LED strip makkelijker te bevestigen.
 
 
 
@@ -41,12 +42,34 @@ Versie 4 is het uiteindelijke ontwerp geworden. Deze versie lijkt zeer veel op v
 
 We hielden er telkens rekening mee dat de interne componenten vlot bereikbaar moeten zijn.
 
-We zorgden er voor dat er openingen voorzien zijn om de power knop van de powerbank in te kunnen drukken en zodat de oplaad poort van de powerbank naar buiten kan gebracht worden, op deze manier moet de behuizing niet geopend worden om het op te laden
+We zorgden er voor dat er openingen voorzien zijn om de power knop van de powerbank in te kunnen drukken en zodat de oplaad poort van de powerbank naar buiten kan gebracht worden, op deze manier moet de behuizing niet geopend worden om het op te laden.
 
 ## LED strip
 
 De LED strip wordt aan de binnenkant van de behuizing bevestigd. Door een melk plectieplaat te gebruiken als deksel, zullen de LED’s goed zichtbaar zijn. Er zijn dan ook gleuven voorzien om deze plaat door te schuiven.
 
+Door de aanwezigheid van een afronding in de hoeken, is de LED strip niet geplooid als deze geplakt wordt.
+
 ## Zichtbaarheid licht
 
 Omdat de LED strip aan de binnenkant van de behuizing zit, moeten we ervoor zorgen dat alles goed zichtbaar is naar buiten toe. Op het eerste zicht ziet alles er duidelijk uit, door het gebruik van een witte PLA en de goede hangplaats van de LED strip kaatst het licht genoeg rond. Het licht is fel genoeg om van ver duidelijk het kleur te zien. Ook al is de zichtbaarheid goed, gebruiken we toch een reflecterende rol zodat het licht nog extra goed kan rondkaatsen. Dit helpt ook met het even belichten van het deksel, zodat er zeker geen donkere plekken meer zichtbaar zijn.
+
+## Ventilatiegaten
+
+Onder de powerbank en ESP32 zijn er ook ventilatiegaten voorzien, deze hebben als functie de componenten op een veilige en functionele temperatuur te houden.
+
+### Gaten powerbank
+
+De temperatuur van de powerbank blijft ook bij langdurig gebruik laag, toch kiezen we ervoor om deze gaten te voorzien. De gaten kunnen ook de temperatuur van de LED's en de totale behuizing verlagen.
+
+### Gaten ESP32
+
+De temperatuur van de ESP32 kan wel relatief warm worden, vandaar dat we de gaten voorzien.
+
+## Deksel
+
+### Maken deksel
+Voor het deksel wordt een plaat met dikte 2,5 mm gelazercut met afmetingen volgens het gat van de behuizing.
+
+### Bevestigen deksel
+Als bevestiging van het deksel gebruiken we een schuifsysteem. Hierdoor kan de behuizing makkelijk geopend worden mocht dit nodig zijn.
