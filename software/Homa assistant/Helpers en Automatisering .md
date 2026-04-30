@@ -1,31 +1,23 @@
-# Scènes Toevoegen
+# Helpers Toevoegen
 
-We maken gebruik van scènes omdat we daarmee een vaste kleur voor de ledstrip kunnen instellen wanneer een bepaalde scène wordt geactiveerd. In een automatisering zelf kunnen we namelijk niet rechtstreeks bepalen welke kleur de ledstrip moet hebben. Dit is dus een kleine omweg om dat toch mogelijk te maken.
+We maken gebruik van Helpers om zo goed te communiceren met de website voor het meldingsysteem. 
 
-## Scènes aanmaken
+## Helpers maken
 
-In Home Assistant ga je naar Instellingen → Automatiseringen en scènes, en klik je vervolgens bovenaan op Scènes.
+Om een helper aan te maken ga je naar instellingen → Apparaten en diensten 
 [Instelling Home assitant](/software/afbeeldingen/Instellingen%20Home%20Assistant.png)
+[Apparaten en diensten ](/software/afbeeldingen/apparaten%20en%20diensten.png)
 
-[Automatisering en Scènes](/software/afbeeldingen/automatisering%20en%20scènes.png)
+Dan selecteer je het tablad bovenaan naar helper.
+[helpers tablad](/software/afbeeldingen/helpers%20tablad.png)
 
-[Tablad scènes](/software/afbeeldingen/Tablad%20scènes.png)
+Dan klik je onderaan op helper aanmaken.
 
-
-Zodra je hier bent, kun je onderaan op Scène toevoegen klikken.
-[Scène Toevoegen](/software/afbeeldingen/scène%20toevoegen.png)
-
-
-Vervolgens voeg je bij Apparaten een nieuw apparaat toe en zoek je in de lijst naar het juiste apparaat. In dit geval is dat “unk_manufacturer unk_model”.
-
-Zodra dit is gelukt, klik je op het lampje om de kleur in te stellen die je wilt gebruiken.
-[Kleur instellen](/software/afbeeldingen/kleur%20instellen.png) 
-
-Als dit gelukt is, zie je dat het lampje de kleur heeft die je hebt gekozen.
-[kleur ingesteld](/software/afbeeldingen/kleur%20ingesteld.png)
+Dan ga je in de lijst zoeken naar keuzeliijst kies je een naam best in het formaat Bed..._C... zodat je makelijk in je automatisering de namen zelf kunt aanpassen zonder te kopiëren. 
+Daarna ga je bij opties er 4 toevoegen namelijk: idle,present, call en extra.
+[Helper aanmaken](/software/afbeeldingen/helper%20aanmaken.png)
 
 
-Daarna hoef je de scène alleen nog op te slaan en een naam te geven naar keuze.
 
 
 # Automatisering Toevoegen

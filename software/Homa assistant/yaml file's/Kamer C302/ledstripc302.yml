@@ -1,0 +1,56 @@
+alias: "Kamer C302: Master Ledstrip"
+description: ""
+triggers:
+  - trigger: state
+    entity_id: 
+      - input_select.bed1_c302
+      - input_select.bed2_c302
+      - input_select.bed3_c302
+      - input_select.bed4_c302
+actions:
+  - variables:
+      bedden:
+        - input_select.bed1_c302
+        - input_select.bed2_c302
+        - input_select.bed3_c302
+        - input_select.bed4_c302
+      aantal_extra: "{{ expand(bedden) | selectattr('state', 'eq', 'extra') | list | count }}"
+      aantal_call: "{{ expand(bedden) | selectattr('state', 'eq', 'call') | list | count }}"
+      aantal_present: "{{ expand(bedden) | selectattr('state', 'eq', 'present') | list | count }}"
+
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ (aantal_extra | int > 0) or (aantal_call | int > 1) }}"
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: light.0xe4b323fffea281fc
+            data:
+              rgb_color: [0, 0, 255]
+              brightness: 255
+      - conditions:
+          - condition: template
+            value_template: "{{ aantal_call | int == 1 }}"
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: light.0xe4b323fffea281fc
+            data:
+              rgb_color: [255, 0, 0]
+              brightness: 255
+      - conditions:
+          - condition: template
+            value_template: "{{ aantal_present | int > 0 }}"
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: light.0xe4b323fffea281fc
+            data:
+              rgb_color: [255, 165, 0]
+              brightness: 255
+    default:
+      - action: light.turn_off
+        target:
+          entity_id: light.0xe4b323fffea281fc
+mode: restart

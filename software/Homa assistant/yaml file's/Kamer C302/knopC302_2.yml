@@ -1,0 +1,72 @@
+alias: Knop C302 Bed 2
+description: ""
+triggers:
+  - domain: mqtt
+    device_id: f92fc1c96a1f7d901655abd8817545ae
+    type: action
+    subtype: single
+    trigger: device
+    id: single
+  - domain: mqtt
+    device_id: f92fc1c96a1f7d901655abd8817545ae
+    type: action
+    subtype: double
+    trigger: device
+    id: double
+  - domain: mqtt
+    device_id: f92fc1c96a1f7d901655abd8817545ae
+    type: action
+    subtype: long
+    trigger: device
+    id: long
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: single
+          - condition: state
+            entity_id: input_select.bed2_c302
+            state: idle
+        sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.bed2_c302
+            data:
+              option: call
+          - action: rest_command.send_call_c302_2
+      - conditions:
+          - condition: trigger
+            id: single
+          - condition: not
+            conditions:
+              - condition: state
+                entity_id: input_select.bed2_c302
+                state: idle
+        sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.bed2_c302
+            data:
+              option: idle
+          - action: rest_command.send_idle_c302_2
+      - conditions:
+          - condition: trigger
+            id: double
+        sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.bed2_c302
+            data:
+              option: present
+          - action: rest_command.send_present_c302_2
+      - conditions:
+          - condition: trigger
+            id: long
+        sequence:
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.bed2_c302
+            data:
+              option: extra
+          - action: rest_command.send_extra_c302_2
+mode: single
