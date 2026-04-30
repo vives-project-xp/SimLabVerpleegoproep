@@ -1,10 +1,11 @@
 # Handleiding
 
 ## Inhoudstafel 
-[**HomeAssistant installeren op Raspberry Pi**](##HomeAssistant-installeren-op-Raspberry-Pi)
+[**HomeAssistant installeren op Raspberry Pi**](#homeassistant-installeren-op-raspberry-pi)
 
-[**Code toevoegen op Esp32**](##Code-toevoegen-op-Esp32)
+[**Code toevoegen op Esp32**](#code-toevoegen-op-esp32)
 
+[**yamle code in home assitant**](#yamle-code-in-home-assitant)
 
 
 
@@ -119,3 +120,6 @@ Handleiding
 
 Om de code te zetten moet je eerst in arduino ide de juiste code file openen namelijk deze: [code ledstrip](/software/ledProgramma's/ledstrip/ledstrip.ino). Eenmaal je deze code hebt geselecteerd moet je nog een paar instellingen in arduino ide instellen zodat je apparaat zeker als een een zigbee aparaat werkt. Dit vind je in deze file: [instellingen arduino](/software/ledProgramma's/arduino_instellingen.md)
 
+
+## yamle code in home assitant
+De yaml code's zijn puur voor in de automatiseringen te plaatsen hoe je een eerste automatisering aanmaaken en ook nog helpers de info hierover  bevind zich in deze file: [automatisering aanmaken](/software/Homa%20assistant/Helpers%20en%20Automatisering%20.md). Eenmaal je dit hebt gedaan kun je ze plakken in de juiste automatiseringen en ben je klaar met de automatisering van knop naar ledstrip. 
