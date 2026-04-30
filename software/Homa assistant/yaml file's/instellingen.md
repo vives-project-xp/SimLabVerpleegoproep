@@ -1,37 +1,42 @@
-# Yamle file's gebruik
+# YAML-bestanden Gebruiken
 
-De gegevenen yaml file's zijn voor de automatisering dat je moet aanmaken in home assistant zelf. In princiepe kun je deze ook zelf aanmaken maar het is makelijker om ze te schrijven. In deze folder zul je 2 mappen zijn namleijk kamer C302 en C305 dit zijn al de voorgemaakt yaml bestanden voor ieder knop en ledstrip voor in die bepaalde kamer. Om zelf deze bestanden te kunnen aanmaken moet je een paar dingen veranderen en hieronder word uitgelegd wat je precies moet veranderen.
+De meegeleverde YAML-bestanden bevatten de automatiseringen die je in Home Assistant moet aanmaken. In principe kun je deze in de interface visueel aanmaken, maar rechtstreeks de YAML-code bewerken is een stuk sneller. In deze map vind je twee submappen, namelijk voor kamer C302 en C305. Dit zijn de voorgemaakte YAML-bestanden voor de knoppen en Master Ledstrip in de betreffende kamer. Om deze bestanden voor jouw opstelling correct te laten werken, moet je enkele parameters aanpassen. Hieronder lees je precies hoe je dit doet.
 
 ## Knoppen
 
-### Id aanpassen 
+### ID aanpassen 
 
-Iedere knop heeft zijn eigen Id en die moest je in de file op 3 plaatsen invullen zodat het duidelijk is dat deze automatisering aan deze knop is gelinkt. Je moet ze op deze plaatsen aanpassen. 
-[Id aanpassen](./Afbeeldingen/id%20instellingen.png)
+Iedere Zigbee-knop heeft een uniek apparaat-ID (Device ID). Om ervoor te zorgen dat de automatisering reageert op de juiste fysieke knop, moet je deze ID in het YAML-bestand op drie specifieke plaatsen invullen.
 
-De Id kun je halen als je de knop hebt toegevoegd in Home assistant zelf kun je deze zien in de zoekbalk van home assitant als je naar de specifiek gaat.
-[Id vinden](./Afbeeldingen/Id%20vinden.png)
+<img src="./Afbeeldingen/id%20instellingen.png" alt="Id aanpassen" width="600" />
 
-### Naam aanpassen 
-De namen worden aangepast naar de namen van je helper dat je hebt aangemaakt dit word uitgeleg in deze file: [helper aanmaken](/software/Homa%20assistant/Helpers%20en%20Automatisering%20.md) Nu moet je kijken naar de helper namen en deze worden ingevuld op de entity_id. De action moet je iedere keer aanpassen naar het zelfde formaat dat je nu ziet namelijk eerst het lokaal en dan het bed. 
+Je kunt dit apparaat-ID vinden in Home Assistant zodra je de knop succesvol hebt toegevoegd. Navigeer naar de apparaatpagina van deze specifieke knop en bekijk de URL in de zoekbalk van je browser; het lange nummer is je ID.
 
-[namenknop](./Afbeeldingen/namenknop.png)
+<img src="./Afbeeldingen/Id%20vinden.png" alt="Id vinden" width="600" />
 
-## ledstrip
+### Namen aanpassen 
+De entiteitsnamen (`entity_id`) in de code moeten overeenkomen met de specifieke "Helper" (`input_select`) die je per bed hebt aangemaakt. Dit proces wordt stap voor stap uitgelegd in de handleiding [Helper aanmaken](/software/Homa%20assistant/Helpers%20en%20Automatisering%20.md). 
+Controleer de naam van je helpers en vul deze in onder `entity_id`. Let er ook op dat je het REST-API commando bij `action` aanpast naar het logische formaat voor jouw project, oftewel: lokaal en bednummer (bijv. `rest_command.send_call_c302_1`).
 
-Per kamer heb je 1 yaml file voor de ledstrip deze steek je in een nieuwe automatisering en pas je ook nog aan naar de juist namen en id.
+<img src="./Afbeeldingen/namenknop.png" alt="Namen knop" width="600" />
 
-### Id aanpassen 
-Iedere ledstrip heeft zijn eigen Id dus die moet je iedere keer aanpassen naar de juist dat je gebruikt dit doe je op 4 plaatsen.
+## Master Ledstrip
 
-[Id aanpassen](./Afbeeldingen/id%20ledstrip.png)
+Per kamer is er bovendien één `ledstrip.yml` bestand dat als "Master" dient. Deze logica plak je ook in een nieuwe automatisering en stuur je aan door de juiste namen en ID's te koppelen.
 
-De Id van de ledstrip vind je als je naar apparaten en diesten → mqtt en dan je kamer selecteren die je wilt. Dan klik je rechtsboven op de 3 puntjes rechtsboven en klik je op entiteiten. Dan kies je het lampje en druk je op het tandwieltje en dan kun je zijn identiteit zien. 
+### ID aanpassen 
+Iedere ledstrip-controller krijgt vanuit Zigbee2MQTT of Home Assistant een unieke Entiteit-ID toegewezen. Vul deze ID op vier plaatsen in de YAML-code in `target -> entity_id` in, zodat de juiste lamp gaat branden.
 
-[id_zoeken](./Afbeeldingen/id_zoeken.png)
+<img src="./Afbeeldingen/id%20ledstrip.png" alt="Id aanpassen ledstrip" width="600" />
 
-[id vinden ledstrip](./Afbeeldingen/id%20ledstrip%20vinden.png)
+Je vindt de exacte entiteitsnaam van de ledstrip als volgt: 
+Navigeer naar **Instellingen** → **Apparaten & Diensten** → **MQTT** en klik op je ledstrip-apparaat in de bestemde kamer. Klik vervolgens op het lamp/schakelaar-icoontje bij bediening, open het instellingen-tandwieltje rechtsboven in de pop-up en kopieer vanaf daar de "Entiteit-ID" (meestal beginnend met `light.`).
 
-### bedden toevoegen
-In de ledstrip code kun je makelijk bedden toevoegen door gewoon de naam van je helper toe te voegen in deze 2 code blokken.
-[bedden toevoegen](./Afbeeldingen/bedden%20toevoegen.png)
+<img src="./Afbeeldingen/id_zoeken.png" alt="Id zoeken" width="600" />
+
+<img src="./Afbeeldingen/id%20ledstrip%20vinden.png" alt="Id vinden ledstrip" width="600" />
+
+### Bedden toevoegen
+De ledstrip-code is ontworpen om makkelijk op te schalen. Als je een nieuw bedbed aan de kamer toevoegt, voeg je gewoon eenvoudig de naam van de nieuwe helper toe aan de lijst onder de `triggers` en `variables`. De prioriteit (`extra`, `call`, `present`) van alle opgesomde bedden wordt dan automatisch foutloos berekend!
+
+<img src="./Afbeeldingen/bedden%20toevoegen.png" alt="Bedden toevoegen" width="600" />
