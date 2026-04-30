@@ -6,7 +6,7 @@ Dit bestand bevat een uitgebreide handleiding bestemd voor de gebruiker van het 
 ## Installatie
 
 ## Gebruik knop
-Bij iedere melding of verandering van in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd een bijhorende melding.
+Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd een bijhorende melding.
 
 ### Meldingen patiënt
 #### Hulp gevraagd
@@ -27,19 +27,21 @@ Hierdoor zal het bijhorende bed op de app terug groen kleuren en de lamp van de 
 
 #### Extra hulp nodig
 Als de medewerker **1x lang** de knop indrukt (ongeveer 2s-3s), zal er een extra hulp aanvraag verzonden worden.
-Ook als er meer dan 1 "Hulp gevraagd" meldingen in een kamer zijn zal automatisch extra hulp opgeropen worden.
+Ook als er meer dan één "Hulp gevraagd" meldingen in een kamer zijn zal automatisch extra hulp opgeroepen worden.
 
 Dit zorgt ervoor dat het bijhorende bed op de app blauw brand, deze als “Extra hulp nodig” geregistreerd wordt en de lamp van de bijhorende kamer blauw kleurt.
 
 **Instructieblad:**
 
+<img src="../handleidingen/afbeeldingen/ManualImage.png" height="auto" width="480">
 
 ## Onderhoud
 ### Lamp
-Zorg ervoor dat de poerbank in de behuizing regelmatig gecontroleerd wordt.
+Zorg ervoor dat de powerbank in de behuizing regelmatig gecontroleerd wordt.
 
 ### Knop
 
-
 ## FAQ
+
+
 
