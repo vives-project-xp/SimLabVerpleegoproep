@@ -35,3 +35,5 @@ We kunnen afleiden dat een volledig opgeladen powerbank voor ongeveer 53,8 min e
 In realiteit zal de powerbank nooit deze grote waarden moeten leveren en voor een constante periode. De powerbank zal niet altijd aan zijn. Indien deze toch aan is zullen de LED's niet altijd branden en de getrokken stroom nooit 3,1 A bereiken.
 
 Dit betekend dat de daadwerkelijke levensduur van een volledig opgeladen powerbank stukken groter zal zijn dan deze 53,8 min.
+
+Als we een ruim gerekende stroom van ongeveer 500 mA nemen, resulteerd dit in een levensduur van ongeveer 20 h. Deze 20 h is dan ook voor constante belasting, in realiteit zullen de LED's niet altijd aan liggen en ook niet met volle sterkte branden. Als we met een factor 3 (LED's branden niet altijd en worden niet altijd gebruikt) rekening houden hebben we een levensduur van 60 h, deze waarde kan in realiteit nog hoger liggen aangezien de gebruikte waarden nog altijd ruim gerekend zijn.
