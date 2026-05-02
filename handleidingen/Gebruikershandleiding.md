@@ -4,6 +4,23 @@
 Dit bestand bevat een uitgebreide handleiding bestemd voor de gebruiker van het systeem, er zullen geen technische details of diepgang voorkomen. Er zal gesproken worden over de installatie, gebruik, onderhoud en FAQ.
 
 ## Installatie
+# Moet zeker nog naar gekeken worden (installatie rasp Berry Pi).
+### **Knop**
+De knop installeren gebeurt heel eenvoudig.
+1.	Steek de knophouder in het gat van de oranje schijf.
+2.	Klik de knop op de schijf met behulp van de ingebouwde magneet.
+3.	Schuif de knophouder over de afstandsbediening van het bed of over andere passende objecten.
+4.	De knop zou standaard al in het systeem moeten zitten waardoor deze meteen bruikbaar zou moeten zijn.
+
+### **Signalisatielamp**
+Indien de componenten nog moeten aangesloten worden, gaat dit eenvoudig.
+1.	Plaats de powerbank in het daarvoor bestemde vak in de behuizing.
+2.	Plaats de microcontroller in het daarvoor bestemde vak in de behuizing.
+3.	Verbind de kabel en ga van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller.
+4.	Druk op de powerknop van de powerbank zodat deze ingeschakeld is.
+5.	Bind de kabel vast met een spanband in de voorziene gaten.
+6.	Schuif het deksel van de behuizing dicht.
+7.	Nu kan de behuizing opgehangen met worden aan de voorziene plaats aan de muur.
 
 ## Gebruik knop
 Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd een bijhorende melding.
@@ -51,11 +68,11 @@ Als u surft naar https://verpleegkunde.voltlab.net of de applicatie opent komt u
  
 <img src="../handleidingen/afbeeldingen/AfbeeldingUM4.png" height="auto" width="400"><br>
 
-1.	In het vak “Gebruikersnaam” vult u een bestaande gebruikersnaam in. Indien u een leerling bent vult u “Leerling” in, indien u een leerkracht bent vult u “Leerkracht” in.
+1.  In het vak “Gebruikersnaam” vult u een bestaande gebruikersnaam in. Indien u een leerling bent vult u “Leerling” in, indien u een leerkracht bent vult u “Leerkracht” in.
 
-2.	In het vak “Wachtwoord” vult u een correct wachtwoord in. Indien u een leerling bent krijgt u deze van uw leerkracht.
+2.  In het vak “Wachtwoord” vult u een correct wachtwoord in. Indien u een leerling bent krijgt u deze van uw leerkracht.
 
-3.	Wanneer alles ingevuld is mag op de “Inloggen” knop gedrukt worden.<br>
+3.  Wanneer alles ingevuld is mag op de “Inloggen” knop gedrukt worden.<br>
 **OPGELET: Het inloggen is hoofdletter gevoelig.**
 
 ### **Overzicht (leerling)**
@@ -63,25 +80,25 @@ Wanneer u ingelogd bent als leerling krijgt u onderstaand overzicht.
 
 <img src="../handleidingen/afbeeldingen/AfbeeldingUM5.png" height="auto" width="800"><br>
  
-1.	**Overzicht aanvragen:** Hier is de totale som van alle aanvragen te zien. De hoeveelheid “Hulp gevraagd” en “Collega aanwezig” meldingen zijn hier terug te vinden.
+1.  **Overzicht aanvragen:** Hier is de totale som van alle aanvragen te zien. De hoeveelheid “Hulp gevraagd” en “Collega aanwezig” meldingen zijn hier terug te vinden.
 
-2.	**Overzicht kamers:** Hier is een overzichtelijke weergave van de kamers terug te vinden. Per kamer is er een vak per bed, deze veranderen van kleur en melding afhankelijk van het gebruik van de bijhorende knop. Op deze manier is alles makkelijk bij te houden.
+2.  **Overzicht kamers:** Hier is een overzichtelijke weergave van de kamers terug te vinden. Per kamer is er een vak per bed, deze veranderen van kleur en melding afhankelijk van het gebruik van de bijhorende knop. Op deze manier is alles makkelijk bij te houden.
 
-3.	**Legende:** Een kleuren legende met informatie over de meldingen.
+3.  **Legende:** Een kleuren legende met informatie over de meldingen.
 
-4.	**Meldingen inschakelen:** Deze knop moet ingedrukt worden ingeschakeld om notificaties op een telefoon of andere toestellen te kunnen ontvangen.<br>
+4.  **Meldingen inschakelen:** Deze knop moet ingedrukt worden ingeschakeld om notificaties op een telefoon of andere toestellen te kunnen ontvangen.<br>
 **OPGELET: Het is enkel mogelijk om notificaties te ontvangen met de applicatie niet met de website.**
 
-5.	**Uitloggen:** Met deze knop kunt u uitloggen, na het uitloggen ontvangt u geen meldingen.
+5.  **Uitloggen:** Met deze knop kunt u uitloggen, na het uitloggen ontvangt u geen meldingen.
 
 ### **Overzicht (leerkracht)**
 Het overzicht van een leerkracht is gelijkaardig aan dat van een leerling. Een leerkracht ziet de knop “Instellingen staan naast de “Meldingen inschakelen” knop. Wanneer deze wordt ingedrukt komt u op het onderstaande menu terecht.
 
 <img src="../handleidingen/afbeeldingen/AfbeeldingUM6.png" height="auto" width="600"><br>
  
-1.	In deze vakken kunt u het algemeen wachtwoord voor het leerkrachten account aanpassen. Dit gebeurt door eerst het huidige wachtwoord in te vullen en daarna twee keer het nieuwe wachtwoord.
+1.  In deze vakken kunt u het algemeen wachtwoord voor het leerkrachten account aanpassen. Dit gebeurt door eerst het huidige wachtwoord in te vullen en daarna twee keer het nieuwe wachtwoord.
 
-2.	In deze vakken kunt u het algemeen wachtwoord voor het leerlingen account aanpassen. Dit gebeurt door twee keer het nieuwe wachtwoord in te vullen.<br>
+2.  In deze vakken kunt u het algemeen wachtwoord voor het leerlingen account aanpassen. Dit gebeurt door twee keer het nieuwe wachtwoord in te vullen.<br>
 **OPGELET: De wachtwoorden zijn hoofdletter gevoelig.**
 
 ## Onderhoud
@@ -98,7 +115,7 @@ Aangezien de lampen werken met een powerbank, moeten deze tijdig her opgeladen w
 
 4.  Deze kabel kan nu gebruikt worden om de powerbank op te laden. U kunt de kabel makkelijker bereikbaar maken door deze door het voorziene gat in de behuizing te steken of u kunt gerust de powerbank uit de behuizing halen.
 
-    **OPGELET: Hiervoor zijn er een aantal belangrijke handelingen voor nodig die behandelt worden vanaf mstap 8**. 
+    **OPGELET: Hiervoor zijn er een aantal belangrijke handelingen voor nodig die behandelt worden vanaf stap 8**. 
 
 5.  De status van het opladen kan gezien worden aan de bovenzijde van de powerbank.
  
@@ -138,6 +155,11 @@ Aangezien de knoppen op een batterij werken, moeten deze tijdig her opgeladen wo
 6.  Vervolgens mag de knop terug aan de oranje magneet gehangen worden en is het klaar voor gebruik.
 
 ## FAQ
+Q: De signalisatielamp werkt niet meer.
+A: 
+-	Controleer of de kabel van de powerbank naar de microcontroller correct is aangesloten.<br>
+De kabel moet van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller gaan.
+
 
 
 
