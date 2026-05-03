@@ -1,0 +1,10 @@
+{
+  "Leerkracht": {
+    "password": "change-me",
+    "role": "leerkracht"
+  },
+  "Leerling": {
+    "password": "change-me",
+    "role": "leerling"
+  }
+}

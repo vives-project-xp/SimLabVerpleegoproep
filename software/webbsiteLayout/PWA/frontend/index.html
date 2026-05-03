@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SimLab">
+    <link rel="icon" href="/icon.svg">
+    <link rel="apple-touch-icon" href="/icon.svg">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oproepsysteem</title>
+
+    <link rel="stylesheet" href="resources/css/stylesheet.css?v=20260423-005">
+    <script defer src="resources/js/script.js?v=20260430-013"></script>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="top-auth-bar">
+        <div class="top-auth-left">
+            <div id="userInfo" class="top-auth-user">Ingelogd...</div>
+
+            <button id="enablePushBtn" class="top-auth-logout" type="button">
+                Meldingen inschakelen
+            </button>
+
+            <a id="settingsLink" class="top-auth-link hidden" href="/settings.html">
+                <i class="fa-solid fa-gear"></i>
+                Instellingen
+            </a>
+        </div>
+
+        <button id="logoutBtn" class="top-auth-logout" type="button">Uitloggen</button>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true">
+        <div class="toast-inner">
+            <div class="toast-title">
+                <i class="fa-solid fa-bell"></i>
+                Oproep ontvangen
+            </div>
+            <div id="toastMsg" class="toast-msg">Status aangepast</div>
+        </div>
+    </div>
+
+    <div class="page-bg"></div>
+
+    <header class="header-block">
+        <div class="header-inner">
+            <div class="header-icon-wrap">
+                <i class="fa-solid fa-hospital header-icon"></i>
+            </div>
+            <h1 class="header-title">Ziekenhuis monitor</h1>
+            <p class="header-subtitle">Live statusdashboard voor simulatiekamers</p>
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+
+        <section class="overview stats-panel">
+            <table class="overview">
+                <tr class="overview">
+                    <th>Hulp gevraagd</th>
+                    <th>Collega aanwezig</th>
+                    <th>Lage batterij</th>
+                </tr>
+                <tr>
+                    <td id="countHelp">0</td>
+                    <td id="countColleague">0</td>
+                    <td id="countLowBat">0</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="card-container">
+
+            <article class="card room-card">
+                <div class="card-top">
+                    <div>
+                        <p class="room-name">Kamer C302</p>
+                        <p class="room-subtitle">4 bedden</p>
+                    </div>
+                    <div class="room-badge">
+                        <i class="fa-solid fa-bed-pulse"></i>
+                        <span>Actieve monitoring</span>
+                    </div>
+                </div>
+
+                <div id="bedsC302" class="bed-grid">
+                    <div class="bed free" id="C302_1">
+                        <div class="bed-label">Bed 1</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C302_2">
+                        <div class="bed-label">Bed 2</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C302_3">
+                        <div class="bed-label">Bed 3</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C302_4">
+                        <div class="bed-label">Bed 4</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card room-card">
+                <div class="card-top">
+                    <div>
+                        <p class="room-name">Kamer C314</p>
+                        <p class="room-subtitle">6 bedden</p>
+                    </div>
+                    <div class="room-badge">
+                        <i class="fa-solid fa-bed-pulse"></i>
+                        <span>Actieve monitoring</span>
+                    </div>
+                </div>
+
+                <div id="bedsC314" class="bed-grid">
+                    <div class="bed free" id="C314_1">
+                        <div class="bed-label">Bed 1</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C314_2">
+                        <div class="bed-label">Bed 2</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C314_3">
+                        <div class="bed-label">Bed 3</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C314_4">
+                        <div class="bed-label">Bed 4</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C314_5">
+                        <div class="bed-label">Bed 5</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+
+                    <div class="bed free" id="C314_6">
+                        <div class="bed-label">Bed 6</div>
+                        <div class="bed-status">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Geen melding</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <section class="overview legend-box">
+            <h2 class="legend-title">Legende</h2>
+
+            <div class="legend-text">
+                <div class="legend-item">
+                    <span class="legend-color green"></span>
+                    <span>Geen hulp</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-color orange"></span>
+                    <span>Collega aanwezig</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-color red"></span>
+                    <span>Hulp gevraagd</span>
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-color blue"></span>
+                    <span>Extra hulp nodig</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const enablePushBtn = document.getElementById("enablePushBtn");
+
+        function urlBase64ToUint8Array(base64String) {
+            const padding = "=".repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/-/g, "+")
+                .replace(/_/g, "/");
+
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+
+            for (let i = 0; i < rawData.length; i++) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+
+            return outputArray;
+        }
+
+        async function registerServiceWorker() {
+            if (!("serviceWorker" in navigator)) {
+                console.warn("Service workers niet ondersteund");
+                return null;
+            }
+
+            try {
+                const registration = await navigator.serviceWorker.register("/sw.js");
+                console.log("Service worker geregistreerd");
+                return registration;
+            } catch (error) {
+                console.error("Service worker fout:", error);
+                return null;
+            }
+        }
+
+        async function subscribeToPush() {
+            if (!("Notification" in window) || !("PushManager" in window)) {
+                alert("Push notificaties worden niet ondersteund op dit toestel/browser.");
+                return;
+            }
+
+            try {
+                const meResponse = await fetch("/api/me", { cache: "no-store" });
+
+                if (!meResponse.ok) {
+                    alert("Je bent niet ingelogd.");
+                    return;
+                }
+
+                const permission = await Notification.requestPermission();
+
+                if (permission !== "granted") {
+                    alert("Notificaties zijn niet toegestaan.");
+                    return;
+                }
+
+                const keyResponse = await fetch("/api/push/public-key");
+
+                if (!keyResponse.ok) {
+                    alert("Public key ophalen mislukt.");
+                    return;
+                }
+
+                const keyData = await keyResponse.json();
+                const publicKey = keyData.publicKey;
+                const registration = await navigator.serviceWorker.ready;
+                let subscription = await registration.pushManager.getSubscription();
+
+                if (!subscription) {
+                    subscription = await registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(publicKey)
+                    });
+                }
+
+                const subscribeResponse = await fetch("/api/push/subscribe", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(subscription)
+                });
+
+                if (!subscribeResponse.ok) {
+                    alert("Subscription opslaan mislukt.");
+                    return;
+                }
+
+                alert("Meldingen zijn ingeschakeld.");
+                enablePushBtn.textContent = "Meldingen actief";
+                enablePushBtn.disabled = true;
+            } catch (err) {
+                console.error("Push error:", err);
+                alert("Push fout. Check console/logs.");
+            }
+        }
+
+        window.addEventListener("load", async () => {
+            await registerServiceWorker();
+
+            try {
+                const registration = await navigator.serviceWorker.ready;
+                const subscription = await registration.pushManager.getSubscription();
+
+                if (subscription) {
+                    enablePushBtn.textContent = "Meldingen actief";
+                    enablePushBtn.disabled = true;
+                } else {
+                    enablePushBtn.textContent = "Meldingen inschakelen";
+                    enablePushBtn.disabled = false;
+                }
+            } catch (err) {
+                console.error("Push check fout:", err);
+                enablePushBtn.textContent = "Meldingen inschakelen";
+                enablePushBtn.disabled = false;
+            }
+        });
+
+        if (enablePushBtn) {
+            enablePushBtn.addEventListener("click", async () => {
+                await subscribeToPush();
+            });
+        }
+    </script>
+</body>
+</html>

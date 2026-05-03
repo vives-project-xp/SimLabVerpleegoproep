@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instellingen - Oproepsysteem</title>
+
+    <script defer src="resources/js/settings.js?v=20260423-001"></script>
+    <link rel="stylesheet" href="resources/css/stylesheet.css?v=20260423-005">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="top-auth-bar">
+        <div class="top-auth-left">
+            <div id="userInfo" class="top-auth-user">Ingelogd...</div>
+            <a class="top-auth-link" href="/">
+                <i class="fa-solid fa-arrow-left"></i>
+                Dashboard
+            </a>
+        </div>
+
+        <button id="logoutBtn" class="top-auth-logout" type="button">Uitloggen</button>
+    </div>
+
+    <div class="page-bg"></div>
+
+    <header class="header-block">
+        <div class="header-inner">
+            <div class="header-icon-wrap">
+                <i class="fa-solid fa-gear header-icon"></i>
+            </div>
+            <h1 class="header-title">Instellingen</h1>
+            <p class="header-subtitle">Wachtwoorden beheren voor leerkracht en leerling</p>
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+
+        <section class="overview settings-panel">
+            <h2 class="settings-title">Eigen wachtwoord wijzigen</h2>
+            <p class="settings-subtitle">Wijzig hier het wachtwoord van de leerkracht-account</p>
+
+            <div class="settings-form-grid">
+                <div class="settings-form-group">
+                    <label for="currentPassword">Huidig wachtwoord</label>
+                    <input id="currentPassword" type="password" class="settings-input" placeholder="Huidig wachtwoord">
+                </div>
+
+                <div class="settings-form-group">
+                    <label for="newPassword">Nieuw wachtwoord</label>
+                    <input id="newPassword" type="password" class="settings-input" placeholder="Nieuw wachtwoord">
+                </div>
+
+                <div class="settings-form-group">
+                    <label for="confirmPassword">Bevestig nieuw wachtwoord</label>
+                    <input id="confirmPassword" type="password" class="settings-input" placeholder="Bevestig nieuw wachtwoord">
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button id="changeOwnPasswordBtn" class="settings-button" type="button">
+                    <i class="fa-solid fa-key"></i>
+                    Eigen wachtwoord wijzigen
+                </button>
+                <div id="ownPasswordMsg" class="settings-message"></div>
+            </div>
+        </section>
+
+        <section class="overview settings-panel">
+            <h2 class="settings-title">Wachtwoord leerling wijzigen</h2>
+            <p class="settings-subtitle">Alleen leerkrachten kunnen het wachtwoord van leerling aanpassen</p>
+
+            <div class="settings-form-grid">
+                <div class="settings-form-group">
+                    <label for="studentNewPassword">Nieuw wachtwoord leerling</label>
+                    <input id="studentNewPassword" type="password" class="settings-input" placeholder="Nieuw wachtwoord leerling">
+                </div>
+
+                <div class="settings-form-group">
+                    <label for="studentConfirmPassword">Bevestig nieuw wachtwoord leerling</label>
+                    <input id="studentConfirmPassword" type="password" class="settings-input" placeholder="Bevestig nieuw wachtwoord leerling">
+                </div>
+            </div>
+
+            <div class="settings-actions">
+                <button id="changeStudentPasswordBtn" class="settings-button" type="button">
+                    <i class="fa-solid fa-user-pen"></i>
+                    Wachtwoord leerling wijzigen
+                </button>
+                <div id="studentPasswordMsg" class="settings-message"></div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

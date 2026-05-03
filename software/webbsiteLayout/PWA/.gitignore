@@ -1,0 +1,7 @@
+node_modules/
+.env
+push-subscriptions.json
+users.json
+simlab.log
+*.log
+.DS_Store
