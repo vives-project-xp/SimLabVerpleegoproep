@@ -84,21 +84,38 @@ apt install -y nodejs npm
 
 ### Projectmap aanmaken
 ```bash
-mkdir -p /root/simlab-api
-cd /root/simlab-api
-npm init -y
-npm install express
+cd /root/simlab-api/backend
+npm install
+```
+
+De dependencies staan in `backend/package.json`. De huidige backend gebruikt onder andere:
+
+```json
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "web-push": "^3.6.6"
+  }
+}
 ```
 
 ### Server starten
 Voor tijdelijk testen:
 ```bash
-node server.js
+npm start
 ```
 
 Voor op de achtergrond:
 ```bash
-nohup node server.js > simlab.log 2>&1 &
+pm2 start server.js --name simlab-api
+pm2 save
 ```
 
 ### nginx reverse proxy
@@ -134,33 +151,41 @@ Voorbeeld in `configuration.yaml`:
 
 ```yaml
 rest_command:
-  send_call:
-    url: "http://10.20.10.21:3000/api/call"
-    method: POST
-    headers:
-      content-type: "application/json"
-    payload: '{"room":"101","status":"call"}'
+  send_call_c302_1:
+    url: "http://<BACKEND-IP>:3000/api/call"
+    method: post
+    content_type: "application/json"
+    payload: >
+      {
+        "room": "C302",
+        "bed": "1",
+        "bedId": "C302_1",
+        "status": "call"
+      }
 
-  send_present:
-    url: "http://10.20.10.21:3000/api/call"
-    method: POST
-    headers:
-      content-type: "application/json"
-    payload: '{"room":"101","status":"present"}'
+  send_present_c302_1:
+    url: "http://<BACKEND-IP>:3000/api/call"
+    method: post
+    content_type: "application/json"
+    payload: >
+      {
+        "room": "C302",
+        "bed": "1",
+        "bedId": "C302_1",
+        "status": "present"
+      }
 
-  send_extra:
-    url: "http://10.20.10.21:3000/api/call"
-    method: POST
-    headers:
-      content-type: "application/json"
-    payload: '{"room":"101","status":"extra"}'
-
-  send_idle:
-    url: "http://10.20.10.21:3000/api/call"
-    method: POST
-    headers:
-      content-type: "application/json"
-    payload: '{"room":"101","status":"idle"}'
+  send_idle_c302_1:
+    url: "http://<BACKEND-IP>:3000/api/call"
+    method: post
+    content_type: "application/json"
+    payload: >
+      {
+        "room": "C302",
+        "bed": "1",
+        "bedId": "C302_1",
+        "status": "idle"
+      }
 ```
 
 ## 7. Uitleg van de API
@@ -173,9 +198,39 @@ Voorbeeld payload:
 
 ```json
 {
-  "room": "101",
+  "room": "C302",
+  "bed": "1",
+  "bedId": "C302_1",
   "status": "call"
 }
+```
+
+De echte backend verwerkt deze payload zo:
+
+```js
+app.post("/api/call", (req, res) => {
+    const { room, bed, bedId, status } = req.body;
+    const normalizedStatus = status || "idle";
+    const normalizedBedId = normalizeBedId(room, bed, bedId);
+
+    beds[normalizedBedId] = normalizedStatus;
+
+    console.log("Update ontvangen:", {
+        room,
+        bed,
+        bedId: normalizedBedId,
+        status: normalizedStatus
+    });
+
+    sendNotifications({
+        room,
+        bed,
+        bedId: normalizedBedId,
+        status: normalizedStatus
+    });
+
+    res.json({ success: true });
+});
 ```
 
 Ondersteunde statussen:
@@ -191,6 +246,34 @@ Geeft de huidige toestand van alle kamers terug in JSON-formaat.
 
 Deze endpoint wordt door de frontend periodiek opgevraagd om live te updaten.
 
+De huidige backend houdt deze bedden bij:
+
+```js
+const beds = {
+    C302_1: "idle",
+    C302_2: "idle",
+    C302_3: "idle",
+    C302_4: "idle",
+    C314_1: "idle",
+    C314_2: "idle",
+    C314_3: "idle",
+    C314_4: "idle",
+    C314_5: "idle",
+    C314_6: "idle"
+};
+```
+
+De response wordt opgebouwd met tellers:
+
+```js
+app.get("/api/state", requireLogin, (req, res) => {
+    res.json({
+        beds,
+        counts: calculateCounts()
+    });
+});
+```
+
 ## 8. Uitleg van de frontend
 De frontend bestaat uit:
 
@@ -203,9 +286,50 @@ Functionaliteit:
 - toont kamerkaarten
 - toont overzicht met tellers
 - toont legende met kleuren
-- haalt ongeveer elke seconde status op via `/api/state`
+- controleert de login via `/api/me`
+- haalt ongeveer elke 1,2 seconden status op via `/api/state`
 - past kleuren en iconen dynamisch aan
 - toont toastmelding bij statusverandering
+
+De echte polling-code uit `resources/js/script.js`:
+
+```js
+async function fetchState() {
+    try {
+        const res = await fetch("/api/state", { cache: "no-store" });
+
+        if (res.status === 401) {
+            window.location.href = "/login.html";
+            return;
+        }
+
+        const data = await res.json();
+        const beds = data.beds || {};
+        const counts = data.counts || { help: 0, colleague: 0, lowBat: 0 };
+
+        for (const bedId of Object.keys(beds)) {
+            updateBed(bedId, beds[bedId]);
+        }
+
+        updateCounters(counts);
+        maybeNotify(beds);
+    } catch (err) {
+        console.error(err);
+    }
+}
+```
+
+De frontend start daarna met:
+
+```js
+async function init() {
+    const user = await fetchCurrentUser();
+    if (!user) return;
+
+    await fetchState();
+    setInterval(fetchState, 1200);
+}
+```
 
 Kleurlegende:
 
@@ -249,7 +373,7 @@ Belangrijk:
 Controleer of Node.js draait:
 
 ```bash
-ps aux | grep node
+pm2 status
 ```
 
 ### Oude website blijft zichtbaar
@@ -263,8 +387,12 @@ Ctrl + Shift + R
 Test lokaal op de website VM:
 
 ```bash
-curl http://127.0.0.1:3000/api/state
+curl -X POST http://127.0.0.1:3000/api/call \
+  -H "Content-Type: application/json" \
+  -d '{"room":"C302","bed":"1","bedId":"C302_1","status":"call"}'
 ```
+
+Let op: `GET /api/state` vraagt een ingelogde browsersessie. Voor een snelle API-test is `POST /api/call` daarom makkelijker.
 
 ### Home Assistant stuurt niets door
 Controleer:
@@ -272,7 +400,7 @@ Controleer:
 - `configuration.yaml`
 - `rest_command` definities
 - automation triggers en acties
-- payloadinhoud (`room` en `status`)
+- payloadinhoud (`room`, `bed`, `bedId` en `status`)
 
 ### Website verandert niet van kleur
 Controleer of de status exact overeenkomt met de frontend-logica:
@@ -283,17 +411,16 @@ Controleer of de status exact overeenkomt met de frontend-logica:
 - `extra`
 
 ## 12. Bekende beperkingen
-- momenteel vooral gericht op een demo-opstelling met beperkte schaal
+- momenteel gericht op kamers C302 en C314
 - frontend gebruikt polling (geen websockets)
-- geen login/rollenmodel
-- geen echte pushnotificaties
+- login/rollenmodel is aanwezig, maar wachtwoorden staan eenvoudig in `users.json`
+- pushnotificaties zijn aanwezig, maar vragen correcte VAPID keys en HTTPS buiten localhost
 - reset naar `idle` moet expliciet doorgestuurd worden
 
 ## 13. Mogelijke uitbreidingen
 - meerdere kamers tegelijk live koppelen
-- gebruikersrollen en login
-- pushnotificaties
-- volwaardige PWA-functionaliteiten
+- wachtwoorden veilig hashen in plaats van plain text bewaren
+- API-key toevoegen voor `POST /api/call`
 - websockets in plaats van polling
 - live batterijtelemetrie
 - logging en historiek
@@ -303,31 +430,48 @@ Controleer of de status exact overeenkomt met de frontend-logica:
 ### Deploy-structuur op de website VM
 ```text
 /root/simlab-api
-|-- server.js
-|-- package.json
-|-- package-lock.json
-`-- public
+|-- backend
+|   |-- server.js
+|   |-- package.json
+|   |-- users.json
+|   `-- push-subscriptions.json
+`-- frontend
     |-- index.html
+    |-- login.html
+    |-- settings.html
+    |-- manifest.webmanifest
+    |-- sw.js
+    |-- icon.svg
     `-- resources
         |-- css
         |   `-- stylesheet.css
-        |-- js
-        |   `-- script.js
-        `-- images
+        `-- js
+            |-- script.js
+            |-- login.js
+            `-- settings.js
 ```
 
 ### Relevante structuur in deze repository
 ```text
 software/
 |-- readme.md
+|-- README_finale_PWA.md
 |-- Homa assistant/
 |-- ledProgramma's/
 `-- webbsiteLayout/
-    `-- WebsiteLayout/
-        |-- index.html
-        `-- resources/
-            |-- css/stylesheet.css
-            `-- js/script.js
+    `-- PWA/
+        |-- backend/
+        |   |-- server.js
+        |   |-- package.json
+        |   |-- users.example.json
+        |   `-- push-subscriptions.example.json
+        `-- frontend/
+            |-- index.html
+            |-- login.html
+            |-- settings.html
+            `-- resources/
+                |-- css/stylesheet.css
+                `-- js/script.js
 ```
 
 ## 15. Demo-uitleg
