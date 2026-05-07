@@ -5,21 +5,21 @@ Deze handleiding beschrijft hoe je Zigbee toevoegt in Home Assistant en hoe je v
 # Stap 1
 
 Ga op het beginscherm van Home Assistant naar Instellingen (linksonder).
-[Instelling Home assitant](../afbeeldingen/Instellingen%20Home%20Assistant.png)
+<img src="../afbeeldingen/Instellingen%20Home%20Assistant.png" alt="Instelling Home assitant" width="600" />
 
 # Stap 2
 
 Klik op Apparaten en diensten.
-[Apparaten en Diensten Home assitant](../afbeeldingen/Home%20Assistant%20Apparaten%20en%20diensten.png)
+<img src="../afbeeldingen/Home%20Assistant%20Apparaten%20en%20diensten.png" alt="Apparaten en Diensten Home assitant" width="600" />
 
 # Stap 3
 # Zigbee integratie controleren of toevoegen
 
 3.1 Controleer of Zigbee Home Automation al in de lijst staat
-[Zigbee Home Automation bij apparaten en diensten](../afbeeldingen/Zigbee%20Home%20Automation.png)
+<img src="../afbeeldingen/Zigbee%20Home%20Automation.png" alt="Zigbee Home Automation bij apparaten en diensten" width="600" />
 
 3.2 Staat deze er niet? Klik rechtsonder op Integratie toevoegen
-[integratie toevoegen](../afbeeldingen/Integratie%20toevoegen.png)
+<img src="../afbeeldingen/Integratie%20toevoegen.png" alt="integratie toevoegen" width="600" />
 
 
 3.3 Zoek naar Zigbee Home Automation
