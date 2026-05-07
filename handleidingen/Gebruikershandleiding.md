@@ -4,7 +4,7 @@
 Dit bestand bevat een uitgebreide handleiding bestemd voor de gebruiker van het systeem, er zullen geen technische details of diepgang voorkomen. Er zal gesproken worden over de installatie, gebruik, onderhoud en FAQ.
 
 ## Installatie
-# Moet zeker nog naar gekeken worden (installatie rasp Berry Pi).
+# Moet zeker nog naar gekeken worden (installatie raspberry Pi).
 ### **Knop**
 De knop installeren gebeurt heel eenvoudig.
 1.	Steek de knophouder in het gat van de oranje schijf.
@@ -156,9 +156,17 @@ Aangezien de knoppen op een batterij werken, moeten deze tijdig her opgeladen wo
 
 ## FAQ
 Q: De signalisatielamp werkt niet meer.
+<br>
 A: 
--	Controleer of de kabel van de powerbank naar de microcontroller correct is aangesloten.<br>
-De kabel moet van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller gaan.
+ - Controleer of de kabel van de powerbank naar de microcontroller correct is aangesloten.De kabel moet van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller gaan.
+<br>
+
+Q: De knop reageert niet op de ledstrip en de website.
+
+A:
+- Als hij heeft uitgestaan en hij reageert niet meer direct moet je op het kleine knopje drukken vanboven op de knop en dan als je nog een drukt zou hij normaal moeten reageren. 
+<br>
+
 
 
 
