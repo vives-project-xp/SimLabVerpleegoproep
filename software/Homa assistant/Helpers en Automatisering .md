@@ -5,7 +5,7 @@ We maken gebruik van Helpers om zo goed te communiceren met de website voor het 
 ## Helpers maken
 
 Om een helper aan te maken ga je naar instellingen → Apparaten en diensten 
-<img src="/software/afbeeldingen/Instellingen%20Home%20Assistant.png" alt="Instelling Home assitant" width="600" />
+<img src="/software/" alt="Instelling Home assitant" width="600" />
 <img src="/software/afbeeldingen/apparaten%20en%20diensten.png" alt="Apparaten en diensten " width="600" />
 
 Dan selecteer je het tablad bovenaan naar helper.
