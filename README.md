@@ -24,14 +24,14 @@ Dit zijn uitbreidingen die mogelijk zijn als we genoeg tijd over hebben, de basi
 ### Begin affiche
 
 <div style="display: flex; gap: 10px;">
-   <img src="./archief/img/VIVESVerpleegoproepsysteem.png" height="auto" width="480">
+   <img src="./archief/afbeeldingen/VIVESVerpleegoproepsysteem.png" height="auto" width="480">
 </div>
 
 ## Folder structuur
 - [Hardware](./hardware/readme.md) : Hier bevind alles te maken met de hardware.
 - [Software](./software/readme.md ) : Hier bevind alles te maken met de software.
 - [Archief](./archief/readme.md) : Hier vindt u moglijke ideeën en bestanden die gebruikt worden in de documentatie.
-- [Research](./research/readme.md) : Hier vindt u het onderzoek in verband met het project.
+- [Research](./Research/readme.md) : Hier vindt u het onderzoek in verband met het project.
 
 ## Team
 - [<img src="https://github.com/Thomas8650.png" alt="Foto" width="25" style="margin-bottom:-6px;"> Thomas Demeulenaere, fase 2](https://github.com/Thomas8650)
