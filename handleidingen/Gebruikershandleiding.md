@@ -4,23 +4,26 @@
 Dit bestand bevat een uitgebreide handleiding bestemd voor de gebruiker van het systeem, er zullen geen technische details of diepgang voorkomen. Er zal gesproken worden over de installatie, gebruik, onderhoud en FAQ.
 
 ## Installatie
-# Moet zeker nog naar gekeken worden (installatie raspberry Pi).
 ### **Knop**
 De knop installeren gebeurt heel eenvoudig.
 1.	Steek de knophouder in het gat van de oranje schijf.
 2.	Klik de knop op de schijf met behulp van de ingebouwde magneet.
-3.	Schuif de knophouder over de afstandsbediening van het bed of over andere passende objecten.
+3.	Schuif de knophouder over de afstandsbediening van het bed of over andere passende objecten, er kan ook gebruik gemaakt worden van een koord.
 4.	De knop zou standaard al in het systeem moeten zitten waardoor deze meteen bruikbaar zou moeten zijn.
 
-### **Signalisatielamp**
-Indien de componenten nog moeten aangesloten worden, gaat dit eenvoudig.
-1.	Plaats de powerbank in het daarvoor bestemde vak in de behuizing.
-2.	Plaats de microcontroller in het daarvoor bestemde vak in de behuizing.
-3.	Verbind de kabel en ga van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller.
-4.	Druk op de powerknop van de powerbank zodat deze ingeschakeld is.
-5.	Bind de kabel vast met een spanband in de voorziene gaten.
-6.	Schuif het deksel van de behuizing dicht.
-7.	Nu kan de behuizing opgehangen met worden aan de voorziene plaats aan de muur.
+### **Applicatie**
+De applicatie installeren gebeurt heel eenvoudig.
+1. Surf naar [verpleegkunde.voltlab.net](https://verpleegkunde.voltlab.net) op een browser applicatie.
+2. Log in (hoofdstuk Inloggen).<br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM7.png" height="auto" width="240">
+3. Druk op de drie puntjes rechtsboven.<br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM8.png" height="auto" width="240">
+4. Druk op toevoegen aan startscherm, dit zou de installatie moeten starten.
+<br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM9.png" height="auto" width="180">
+5. Nu moet onderstaand icoon zichtbaar moeten zijn op het startscherm.
+<br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM10.png" height="auto" width="120">
 
 ## Gebruik knop
 Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd een bijhorende melding.
@@ -66,7 +69,7 @@ Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en
 ### **Inloggen**
 Als u surft naar https://verpleegkunde.voltlab.net of de applicatie opent komt u op onderstaand scherm terecht.
  
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM4.png" height="auto" width="400"><br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM4.png" height="auto" width="400">
 
 1.  In het vak “Gebruikersnaam” vult u een bestaande gebruikersnaam in. Indien u een leerling bent vult u “Leerling” in, indien u een leerkracht bent vult u “Leerkracht” in.
 
@@ -82,17 +85,17 @@ Wanneer u ingelogd bent als leerling krijgt u onderstaand overzicht.
  
 1.  **Overzicht aanvragen:** Hier is de totale som van alle aanvragen te zien. De hoeveelheid “Hulp gevraagd” en “Collega aanwezig” meldingen zijn hier terug te vinden.
 
-2.  **Overzicht kamers:** Hier is een overzichtelijke weergave van de kamers terug te vinden. Per kamer is er een vak per bed, deze veranderen van kleur en melding afhankelijk van het gebruik van de bijhorende knop. Op deze manier is alles makkelijk bij te houden.
+2.  **Overzicht kamers:** Hier is een overzichtelijke weergave van de kamers terug te vinden. Per kamer en per bed zijn er vakken voorzien, deze veranderen van kleur en melding afhankelijk van het gebruik van de bijhorende knop. Op deze manier is alles makkelijk bij te houden.
 
 3.  **Legende:** Een kleuren legende met informatie over de meldingen.
 
-4.  **Meldingen inschakelen:** Deze knop moet ingedrukt worden ingeschakeld om notificaties op een telefoon of andere toestellen te kunnen ontvangen.<br>
+4.  **Meldingen inschakelen:** Deze knop moet ingedrukt worden om notificaties op een telefoon of andere toestellen te kunnen ontvangen.<br>
 **OPGELET: Het is enkel mogelijk om notificaties te ontvangen met de applicatie niet met de website.**
 
-5.  **Uitloggen:** Met deze knop kunt u uitloggen, na het uitloggen ontvangt u geen meldingen.
+1.  **Uitloggen:** Met deze knop kunt u uitloggen, na het uitloggen ontvangt u geen meldingen meer.
 
 ### **Overzicht (leerkracht)**
-Het overzicht van een leerkracht is gelijkaardig aan dat van een leerling. Een leerkracht ziet de knop “Instellingen staan naast de “Meldingen inschakelen” knop. Wanneer deze wordt ingedrukt komt u op het onderstaande menu terecht.
+Het overzicht van een leerkracht is gelijkaardig aan dat van een leerling. Een leerkracht ziet wel de knop “Instellingen” staan onder de “Meldingen inschakelen” knop. Wanneer deze wordt ingedrukt komt u op het onderstaande menu terecht.
 
 <img src="../handleidingen/afbeeldingen/AfbeeldingUM6.png" height="auto" width="600"><br>
  
@@ -100,6 +103,21 @@ Het overzicht van een leerkracht is gelijkaardig aan dat van een leerling. Een l
 
 2.  In deze vakken kunt u het algemeen wachtwoord voor het leerlingen account aanpassen. Dit gebeurt door twee keer het nieuwe wachtwoord in te vullen.<br>
 **OPGELET: De wachtwoorden zijn hoofdletter gevoelig.**
+
+## Gebruik signalisatie lamp  
+
+### **Aanschakelen**
+Het aanschakelen van de lamp gebeurt door 1x te drukken op de power knop van de powerbank. Deze knop kan eenvoudig bereikt worden door het gat in de behuizing.
+Indien u niet zeker bent of de lamp ingeschakeld is, kunt u altijd het deksel er vanaf schuiven en controleren of de lichtjes van de powerbank effectief aan zijn.<br>
+ <img src="../handleidingen/afbeeldingen/AfbeeldingUM11.png" height="auto" width="120">
+ <img src="../handleidingen/afbeeldingen/AfbeeldingUM3.png" height="auto" width="120">
+
+### **Uitschakelen**
+Het uitschakelen van de lamp gebeurt door 2x kort achtereenvolgens op de power knop van de powerbank te drukken.
+Indien u niet zeker bent of de lamp ingeschakeld is, kunt u ook weer het deksel er vanaf schuiven en controleren of de lichtjes van de powerbank effectief uit zijn.<br>
+ <img src="../handleidingen/afbeeldingen/AfbeeldingUM11.png" height="auto" width="120">
+ <img src="../handleidingen/afbeeldingen/AfbeeldingUM3.png" height="auto" width="120">
+
 
 ## Onderhoud
 ### **Lamp**
@@ -115,7 +133,7 @@ Aangezien de lampen werken met een powerbank, moeten deze tijdig her opgeladen w
 
 4.  Deze kabel kan nu gebruikt worden om de powerbank op te laden. U kunt de kabel makkelijker bereikbaar maken door deze door het voorziene gat in de behuizing te steken of u kunt gerust de powerbank uit de behuizing halen.
 
-    **OPGELET: Hiervoor zijn er een aantal belangrijke handelingen voor nodig die behandelt worden vanaf stap 8**. 
+    **OPGELET: Voor het uithalen van de powerbank zijn er een aantal belangrijke handelingen nodig die behandelt worden vanaf stap 8**. 
 
 5.  De status van het opladen kan gezien worden aan de bovenzijde van de powerbank.
  
@@ -158,13 +176,25 @@ Aangezien de knoppen op een batterij werken, moeten deze tijdig her opgeladen wo
 Q: De signalisatielamp werkt niet meer.
 <br>
 A: 
- - Controleer of de kabel van de powerbank naar de microcontroller correct is aangesloten.De kabel moet van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller gaan.
+ - Controleer of de kabel van de powerbank naar de microcontroller correct is aangesloten. De kabel moet van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller gaan.
 <br>
 
 Q: De knop reageert niet op de ledstrip en de website.
-
+<br>
 A:
-- Als hij heeft uitgestaan en hij reageert niet meer direct moet je op het kleine knopje drukken vanboven op de knop en dan als je nog een drukt zou hij normaal moeten reageren. 
+- Als de knop heeft uitgestaan en dezen niet meer reageert, moet u op het kleine knopje drukken aan de zijkant op van de knop. Als u vervolgens opnieuw probeert, zou het systeem moeten reageren.
+<br>
+
+Q: Ik kan niet inloggen.
+<br>
+A: 
+ - Controleer of u de gebruikersnaam en wachtwoord volledig correct ingeeft. Deze zijn hoofdlettergevoelig en spaties worden ook als verkeerd gezien.
+<br>
+
+Q: Ik krijg geen meldingen meer.
+<br>
+A: 
+ - Een gebruiker kan enkel meldingen ontvangen als deze de applicatie geïnstalleerd heeft. In de applicatie zelf moet de "Meldingen inschakelen" knop zeker ingedrukt worden, wanneer deze ingedrukt is moet er op "Meldingen toestaan" gedrukt worden zodat de applicatie toestemming krijgt om meldingen te verzenden. <br> Indien deze oplossingen niet hielpen, kunt u altijd de applicatie opnieuw installeren.
 <br>
 
 
