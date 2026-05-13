@@ -10,6 +10,8 @@ In dit bestand zal de argumentatie rond de keuzes die werden gemaakt voor het ei
 
 Na veel proberen, zijn we uitgekomen bij de powerbank aan de onderzijde en de ESP32 ernaast aan de bovenzijde gepositioneerd (gezien van bovenaf). We hebben hiervoor gekozen omwille van de positionering van de knoppen en de poorten van de powerbank. Op deze manier is alles makkelijk bereikbaar en ziet de behuizing er niet lomp uit omwille van de diepte.
 
+<img src="../afbeeldingen/AfbeeldingOV2.png" height="auto" width="400">
+
 ### Andere iteraties
 Voordien waren er andere iteraties van de behuizing, waarbij we potentiële ontwerpen uit tekenden om de voordelen en nadelen af te wegen.
 Deze worden hier besproken.
@@ -17,16 +19,24 @@ Deze worden hier besproken.
 #### Versie 1
 Versie 1 was meer bedoelt als startpunt voor de andere versies. Er werd een eerste 3D ontwerp getekend dat kan gebruikt worden om op verder te bouwen of als referentie.
 
+<img src="../afbeeldingen/AfbeeldingOV3.png" height="auto" width="400">
+
 #### Versie 2
 Versie 2 was een ontwerp voor het visualiseren van een concept die we hadden. Bij deze versie was de ESP32 bovenop de powerbank. Dit zou er wel voor zorgen dat de behuizing smaller is, het is dan echter wel hoger en lomper van vorm en vraagt voor een complexere structuur. Daarom hebben we hiervoor ook niet gekozen.
+
+<img src="../afbeeldingen/AfbeeldingOV4.png" height="auto" width="400">
 
 #### Versie 3
 Versie 3 was de eerste versie waarvan we zeker genoeg waren om deze te 3D printen. Het ontwerp had de ESP32 boven de powerbank gelegen aan de bovenzijde gepositioneerd (gezien van bovenaf).
 We zagen echter een probleem die pas heel duidelijk werd bij het 3D printen van de behuizing, de manier waarop we het deksel inschuiven en uitschuiven.
 Bij het ontwerpen leek deze methode stevig en betrouwbaar, dit was echter niet volledig zo. Door het 3D printen zelf is de onderkant van de opening om het deksel door te schuiven beginnen hangen. Dit zorgt ervoor dat de opening niet groot genoeg was. Een ander nadeel is dat de dikte van het stuk boven de opening niet dik genoeg was, dit zorgde ervoor dat dit stuk makkelijk heen en weer kon geplooid worden.
 
+<img src="../afbeeldingen/AfbeeldingOV5.png" height="auto" width="400">
+
 #### Versie 4
 Versie 4 is het uiteindelijke ontwerp geworden. Deze versie lijkt zeer veel op versie 3 met een aantal kleine veranderingen. De grootste aanpassing is het systeem dat we gebruiken om de behuizing te openen. We hebben ook de afmetingen lichtjes verandert en een aantal voorzieningen toegevoegt.
+
+<img src="../afbeeldingen/AfbeeldingOV2.png" height="auto" width="400">
 
 ### Belangrijke onderdelen
 -	Bevat kleine binnenmuren: Dit zorgt voor het in plaats houden van de losse componenten.
@@ -44,11 +54,15 @@ We hielden er telkens rekening mee dat de interne componenten vlot bereikbaar mo
 
 We zorgden er voor dat er openingen voorzien zijn om de power knop van de powerbank in te kunnen drukken en zodat de oplaad poort van de powerbank naar buiten kan gebracht worden, op deze manier moet de behuizing niet geopend worden om het op te laden.
 
+<img src="../afbeeldingen/AfbeeldingOV6.png" height="auto" width="400">
+
 ## LED strip
 
 De LED strip wordt aan de binnenkant van de behuizing bevestigd. Door een melk plectieplaat te gebruiken als deksel, zullen de LED’s goed zichtbaar zijn. Er zijn dan ook gleuven voorzien om deze plaat door te schuiven.
 
 Door de aanwezigheid van een afronding in de hoeken, is de LED strip niet geplooid als deze geplakt wordt.
+
+<img src="../afbeeldingen/AfbeeldingOV7.png" height="auto" width="400">
 
 ## Zichtbaarheid licht
 
@@ -57,6 +71,8 @@ Omdat de LED strip aan de binnenkant van de behuizing zit, moeten we ervoor zorg
 ## Ventilatiegaten
 
 Onder de powerbank en ESP32 zijn er ook ventilatiegaten voorzien, deze hebben als functie de componenten op een veilige en functionele temperatuur te houden.
+
+<img src="../afbeeldingen/AfbeeldingOV8.png" height="auto" width="400">
 
 ### Gaten powerbank
 
@@ -69,7 +85,7 @@ De temperatuur van de ESP32 kan wel relatief warm worden, vandaar dat we de gate
 ## Deksel
 
 ### Maken deksel
-Voor het deksel wordt een plaat met dikte 2,5 mm gelazercut met afmetingen volgens het gat van de behuizing.
+Voor het deksel wordt een plaat met dikte 2 mm gelazercut met afmetingen volgens het gat van de behuizing.
 
 ### Bevestigen deksel
 Als bevestiging van het deksel gebruiken we een schuifsysteem. Hierdoor kan de behuizing makkelijk geopend worden mocht dit nodig zijn.

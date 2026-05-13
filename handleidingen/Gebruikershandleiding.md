@@ -1,5 +1,17 @@
 # Gebruikershandleiding
 
+## Inhoudstafel 
+[**Inleiding**](#inleiding)<br>
+[**Installatie systemen**](#installatie)<br>
+- [**Installatie knop**](#knop)<br>
+- [**Installatie applicatie**](#applicatie)<br>
+
+[**Gebruik knop**](#gebruik-knop)<br>
+[**Gebruik app/website**](#gebruik-app_website)<br>
+[**Gebruik signalisatie lamp**](#gebruik-signalisatie-lamp)<br>
+[**Onderhoud lamp en knop**](#onderhoud)<br>
+[**FAQ**](#faq)<br>
+
 ## Inleiding
 Dit bestand bevat een uitgebreide handleiding bestemd voor de gebruiker van het systeem, er zullen geen technische details of diepgang voorkomen. Er zal gesproken worden over de installatie, gebruik, onderhoud en FAQ.
 
@@ -63,7 +75,7 @@ Dit zorgt ervoor dat het bijhorende bed op de app blauw brand, deze als “Extra
 
 <img src="../handleidingen/afbeeldingen/ManualImage.png" height="auto" width="480"><br>
 
-## Gebruik app/website
+## Gebruik app_website
 Bij ons systeem hoort een website en een app die een overzicht geven van de meldingen, status van kamers met bedden en het mogelijk maakt om meldingen te ontvangen.
 Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd een bijhorende melding.
 ### **Inloggen**
@@ -159,6 +171,7 @@ Aangezien de lampen werken met een powerbank, moeten deze tijdig herladen worden
 
 ### **Knop**
 Aangezien de knoppen op een batterij werken, moeten deze tijdig vervangen worden.
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM13.png" height="auto" width="200"><br>
 
 1.  Haal de knop van de oranje magneet af.
 
@@ -182,7 +195,8 @@ A:
 Q: De knop reageert niet op de ledstrip en de website.
 <br>
 A:
-- Als de knop heeft uitgestaan en dezen niet meer reageert, moet u op het kleine knopje drukken aan de zijkant op van de knop. Als u vervolgens opnieuw probeert, zou het systeem moeten reageren.
+- Als de knop heeft uitgestaan en dezen niet meer reageert, moet u op het kleine knopje drukken aan de zijkant op van de knop (pairing button). Als u vervolgens opnieuw probeert, zou het systeem moeten reageren.<br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM12.png" height="auto" width="400">
 <br>
 
 Q: Ik kan niet inloggen.
