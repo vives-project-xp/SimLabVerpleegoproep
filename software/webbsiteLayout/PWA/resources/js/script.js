@@ -12,21 +12,36 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const previousBeds = {};
 
+    const toastQueue = [];
+    let toastBusy = false;
+
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    async function processToastQueue() {
+        if (toastBusy || toastQueue.length === 0) return;
+        toastBusy = true;
+
+        const message = toastQueue.shift();
+        if (toast && toastMsg) {
+            toastMsg.textContent = message;
+            toast.classList.remove("show");
+            void toast.offsetWidth;
+            toast.classList.add("show");
+            await delay(3200);
+            toast.classList.remove("show");
+            await delay(400);
+        }
+
+        toastBusy = false;
+        processToastQueue();
+    }
+
     function showToast(message) {
         if (!toast || !toastMsg) return;
-
-        toastMsg.textContent = message;
-        toast.classList.remove("show");
-        void toast.offsetWidth;
-        toast.classList.add("show");
-
-        setTimeout(() => {
-            toast.classList.remove("show");
-        }, 3000);
+        toastQueue.push(message);
+        processToastQueue();
     }
 
     function getBedConfig(status) {
@@ -84,11 +99,8 @@ window.addEventListener("DOMContentLoaded", () => {
             if (previous !== undefined && previous !== current) {
                 const cfg = getBedConfig(current);
                 showToast(`${bedId.replace("_", " - Bed ")}: ${cfg.label}`);
-                break;
             }
-        }
 
-        for (const bedId of Object.keys(beds)) {
             previousBeds[bedId] = beds[bedId];
         }
     }
@@ -162,6 +174,11 @@ window.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            if (!res.ok) {
+                showToast("Verbindingsfout — kon status niet ophalen.");
+                return;
+            }
+
             const data = await res.json();
             const beds = data.beds || {};
             const counts = data.counts || { help: 0, colleague: 0, lowBat: 0 };
@@ -173,7 +190,8 @@ window.addEventListener("DOMContentLoaded", () => {
             updateCounters(counts);
             maybeNotify(beds);
         } catch (err) {
-            console.error(err);
+            console.error("fetchState fout:", err);
+            showToast("Geen verbinding met de server.");
         }
     }
 

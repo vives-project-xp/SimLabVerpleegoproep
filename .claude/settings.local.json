@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Rename-Item -Path \"c:\\\\Users\\\\geald\\\\Documents\\\\1. School\\\\Project Experience\\\\Simlab_Verpleegkunde\\\\SimLabVerpleegoproep\\\\software\\\\Homa assistant\" -NewName \"Home assistant\" -Confirm:$false)",
+      "PowerShell(Rename-Item -Path \"c:\\\\Users\\\\geald\\\\Documents\\\\1. School\\\\Project Experience\\\\Simlab_Verpleegkunde\\\\SimLabVerpleegoproep\\\\software\\\\Home assistant\\\\yaml file's\" -NewName \"yaml-files\" -Confirm:$false)"
+    ]
+  }
+}

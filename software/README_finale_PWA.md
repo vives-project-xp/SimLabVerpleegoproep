@@ -447,6 +447,7 @@ Controleer of de status exact overeenkomt met de frontend-logica:
         |   `-- stylesheet.css
         `-- js
             |-- script.js
+            |-- push.js
             |-- login.js
             `-- settings.js
 ```
@@ -456,7 +457,7 @@ Controleer of de status exact overeenkomt met de frontend-logica:
 software/
 |-- readme.md
 |-- README_finale_PWA.md
-|-- Homa assistant/
+|-- Home assistant/
 |-- ledProgramma's/
 `-- webbsiteLayout/
     `-- PWA/
@@ -471,7 +472,9 @@ software/
             |-- settings.html
             `-- resources/
                 |-- css/stylesheet.css
-                `-- js/script.js
+                `-- js/
+                    |-- script.js
+                    `-- push.js
 ```
 
 ## 15. Demo-uitleg
