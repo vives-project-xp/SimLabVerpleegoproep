@@ -21,7 +21,7 @@ De knop installeren gebeurt heel eenvoudig.
 1.	Steek de knophouder in het gat van de oranje schijf.
 2.	Klik de knop op de schijf met behulp van de ingebouwde magneet.
 3.	Schuif de knophouder over de afstandsbediening van het bed of over andere passende objecten, er kan ook gebruik gemaakt worden van een koord.
-4.	De knop zou standaard al in het systeem moeten zitten waardoor deze meteen bruikbaar zou moeten zijn.
+4.	De knop zou standaard al in het systeem moeten zitten waardoor deze meteen bruikbaar zou moeten zijn, indien dit niet gebeurt druk dan op de kleine pairing knop aan de zijkant van de knop zelf.
 
 ### **Applicatie**
 De applicatie installeren gebeurt heel eenvoudig.
@@ -170,7 +170,7 @@ Aangezien de lampen werken met een powerbank, moeten deze tijdig herladen worden
 13. Nu mag de behuizing terug gesloten en opgehangen worden.
 
 ### **Knop**
-Aangezien de knoppen op een batterij werken, moeten deze tijdig vervangen worden.
+Aangezien de knoppen op een batterij werken, moeten deze tijdig vervangen worden.<br>
 <img src="../handleidingen/afbeeldingen/AfbeeldingUM13.png" height="auto" width="200"><br>
 
 1.  Haal de knop van de oranje magneet af.
