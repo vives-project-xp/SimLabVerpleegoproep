@@ -22,7 +22,7 @@ Volg de stappen hieronder voor jouw toestel.
 
 Ga naar [https://verpleegkunde.voltlab.net/](https://verpleegkunde.voltlab.net/) in Safari.
 
-![Stap 1 – Open de website in Safari](afbeeldingen/Safari_1.png)
+<img src="afbeeldingen/Safari_1.png" alt="Stap 1 – Open de website in Safari" width="50%">
 
 ---
 
@@ -30,7 +30,7 @@ Ga naar [https://verpleegkunde.voltlab.net/](https://verpleegkunde.voltlab.net/)
 
 Tik rechts onderaan (of bovenaan) in Safari op de **3 bolletjes** om het menu te openen.
 
-![Stap 2 – 3 bolletjes menu](afbeeldingen/Safari_2.png)
+<img src="afbeeldingen/Safari_2.png" alt="Stap 2 – 3 bolletjes menu" width="50%">
 
 ---
 
@@ -38,7 +38,7 @@ Tik rechts onderaan (of bovenaan) in Safari op de **3 bolletjes** om het menu te
 
 Tik in het menu op **Delen** (Share).
 
-![Stap 3 – Deel-optie](afbeeldingen/Safari_3.png)
+<img src="afbeeldingen/Safari_3.png" alt="Stap 3 – Deel-optie" width="50%">
 
 ---
 
@@ -46,7 +46,7 @@ Tik in het menu op **Delen** (Share).
 
 Scroll in het deelmenu naar beneden en tik op **Zet op beginscherm** (Add to Home Screen).
 
-![Stap 4 – Toevoegen aan beginscherm](afbeeldingen/Safari_4.png)
+<img src="afbeeldingen/Safari_4.png" alt="Stap 4 – Toevoegen aan beginscherm" width="50%">
 
 ---
 
@@ -70,7 +70,7 @@ Bevestig door op **Voeg toe** (Add) te tikken. De app verschijnt nu op je begins
 
 Ga naar [https://verpleegkunde.voltlab.net/](https://verpleegkunde.voltlab.net/) in Google Chrome.
 
-![Stap 1 – Open de website in Chrome](afbeeldingen/Google_1.jpg)
+<img src="afbeeldingen/Google_1.jpg" alt="Stap 1 – Open de website in Chrome" width="50%">
 
 ---
 
@@ -78,7 +78,7 @@ Ga naar [https://verpleegkunde.voltlab.net/](https://verpleegkunde.voltlab.net/)
 
 Tik rechtsboven op de **3 bolletjes** om het menu te openen.
 
-![Stap 2 – 3 bolletjes menu](afbeeldingen/Google_2.jpg)
+<img src="afbeeldingen/Google_2.jpg" alt="Stap 2 – 3 bolletjes menu" width="50%">
 
 ---
 
@@ -86,7 +86,7 @@ Tik rechtsboven op de **3 bolletjes** om het menu te openen.
 
 Tik in het menu op **Toevoegen aan startscherm** (Add to Home Screen).
 
-![Stap 3 – Toevoegen aan startscherm](afbeeldingen/Google_3.jpg)
+<img src="afbeeldingen/Google_3.jpg" alt="Stap 3 – Toevoegen aan startscherm" width="50%">
 
 ---
 
@@ -94,4 +94,4 @@ Tik in het menu op **Toevoegen aan startscherm** (Add to Home Screen).
 
 Bevestig door op **Installeren** te tikken. De app verschijnt nu op je startscherm.
 
-![Stap 4 – Installeren](afbeeldingen/Google_4.jpg)
+<img src="afbeeldingen/Google_4.jpg" alt="Stap 4 – Installeren" width="50%">
