@@ -65,12 +65,6 @@ SSH gebruiken:
 ssh <username>@<ip-van-de-pi>
 ```
 
-Voorbeeld:
-
-```bash
-ssh <username>@<ip-van-de-pi>
-```
-
 ---
 
 ## 4. Netwerkgegevens Raspberry Pi
