@@ -10,8 +10,8 @@ Alles draait om zogenaamde `input_select` entiteiten (zoals `input_select.bed1_c
 - **Op de website:** Je ziet deze statussen direct terug op het Home Assistant dashboard. Als de status in de achtergrond verandert, verandert dit ook op je scherm.
 
 ## 2. De Knoppen
-De bestanden voor de knoppen bevatten automatisaties of acties die gekoppeld zijn aan fysieke zigbeeknopen. 
-- Zodra iemand op een knop drukt, voert de code in het yaml-bestand een actie uit.
+De bestanden voor de knoppen bevatten automatisaties of acties die gekoppeld zijn aan fysieke zigbee knopen. 
+- Zodra iemand op een knop drukt, voert de code in het YAML-bestand een actie uit.
 - Die actie past de status van een `input_select` (bijv. van bed 1) aan naar `call` of `present`.
 
 ## 3. De Master Ledstrip
