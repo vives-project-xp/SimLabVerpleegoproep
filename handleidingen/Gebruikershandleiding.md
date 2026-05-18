@@ -24,18 +24,7 @@ De knop installeren gebeurt heel eenvoudig.
 4.	De knop zou standaard al in het systeem moeten zitten waardoor deze meteen bruikbaar zou moeten zijn, indien dit niet gebeurt druk dan op de kleine pairing knop aan de zijkant van de knop zelf.
 
 ### **Applicatie**
-De applicatie installeren gebeurt heel eenvoudig.
-1. Surf naar [verpleegkunde.voltlab.net](https://verpleegkunde.voltlab.net) op een browser applicatie.
-2. Log in (hoofdstuk Inloggen).<br>
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM7.png" height="auto" width="240">
-3. Druk op de drie puntjes rechtsboven.<br>
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM8.png" height="auto" width="240">
-4. Druk op toevoegen aan startscherm, dit zou de installatie moeten starten.
-<br>
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM9.png" height="auto" width="180">
-5. Nu moet onderstaand icoon zichtbaar moeten zijn op het startscherm.
-<br>
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM10.png" height="auto" width="120">
+De volledige installatiehandleiding voor de applicatie (voor zowel iPhone als Android) is te vinden in de [PWA-Installatiehandleiding](PWA-Installatiehandleiding.md).
 
 ## Gebruik knop
 Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd een bijhorende melding.
