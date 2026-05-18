@@ -36,7 +36,7 @@ Klik op Apparaten en diensten.
 
 ## Stap 4
 
-Ga naar http://<ip-van-pi>:8080 (de webinterface van Zigbee2MQTT)
+Ga naar `http://<ip-van-de-pi>:8080` (de webinterface van Zigbee2MQTT)
 
 Voorbeeld:
 http://192.168.8.42:8080
@@ -152,7 +152,7 @@ Je kan het apparaat hier ook aan een kamer toevoegen.
 5. Controleer of Zigbee2MQTT bereikbaar is
 
    Open:  
-   http://<ip-van-de-pi>:8080
+   `http://<ip-van-de-pi>:8080`
 
    Controleer of de Zigbee2MQTT webinterface correct opent.
 
