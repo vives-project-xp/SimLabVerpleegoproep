@@ -27,6 +27,12 @@ Dit zijn uitbreidingen die mogelijk zijn als we genoeg tijd over hebben, de basi
    <img src="./archief/afbeeldingen/VIVESVerpleegoproepsysteem.png" height="auto" width="480">
 </div>
 
+### Eind affiche
+
+<div style="display: flex; gap: 10px;">
+   <img src="./archief/afbeeldingen/VIVESSimlabFinished.png" height="auto" width="480">
+</div>
+
 ## Folder structuur
 - [Hardware](./hardware/readme.md) : Hier bevind alles te maken met de hardware.
 - [Software](./software/readme.md ) : Hier bevind alles te maken met de software.
