@@ -46,7 +46,7 @@ Wanneer de patiënt hulp nodig heeft drukt deze **1x kort** op de knop.
 
 Dit zorgt ervoor dat het bijhorende bed op de app rood kleurt, deze als “Hulp gevraagd” geregistreerd wordt en indien er geen belangrijkere meldingen zijn zal de lamp van de kamer rood kleuren.
 
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM1.png" height="auto" width="180"><br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM14.png" height="auto" width="180"><br>
 
 ### **Personeel (medewerker)**
 #### **Aanwezigheid registreren**
@@ -54,7 +54,7 @@ Als de medewerker aanwezigheid wilt registreren wanneer er voordien hulp gevraag
 
 Dit zorgt ervoor dat het bijhorende bed op de app van rood naar oranje kleuren, deze als “Collega aanwezig” geregistreerd wordt en indien er geen belangrijkere meldingen zijn zal de lamp van de kamer oranje kleuren.
 
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM1.png" height="auto" width="180"><br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM15.png" height="auto" width="180"><br>
 
 #### **Uitschakelen**
 Als de medewerker de melding wilt afhandelen of uitschakelen kan dit door **1x kort** op de bijhorende knop te drukken (enkel als deze al brand anders wordt er om hulp gevraagd).
@@ -69,7 +69,7 @@ Ook als er meer dan één "Hulp gevraagd" meldingen in een kamer zijn zal automa
 
 Dit zorgt ervoor dat het bijhorende bed op de app blauw brand, deze als “Extra hulp nodig” geregistreerd wordt en de lamp van de bijhorende kamer blauw kleurt.
 
-<img src="../handleidingen/afbeeldingen/AfbeeldingUM1.png" height="auto" width="180"><br>
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM16.png" height="auto" width="180"><br>
 
 **Instructieblad:**
 
