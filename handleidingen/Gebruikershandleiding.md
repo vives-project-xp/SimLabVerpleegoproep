@@ -19,15 +19,20 @@ Dit bestand bevat een uitgebreide handleiding bestemd voor de gebruiker van het 
 ### **Knop**
 De knop installeren gebeurt heel eenvoudig.
 1.	Steek de knophouder in het gat van de oranje schijf.
+
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM17.png" height="auto" width="160"><br>
+
 2.	Klik de knop op de schijf met behulp van de ingebouwde magneet.
 3.	Schuif de knophouder over de afstandsbediening van het bed of over andere passende objecten, er kan ook gebruik gemaakt worden van een koord.
-4.	De knop zou standaard al in het systeem moeten zitten waardoor deze meteen bruikbaar zou moeten zijn, indien dit niet gebeurt druk dan op de kleine pairing knop aan de zijkant van de knop zelf.
+4.	De knop zou standaard al in het systeem moeten zitten waardoor deze meteen bruikbaar zou moeten zijn, indien dit niet gebeurt druk dan kort op de kleine pairing knop aan de zijkant van de knop zelf.
+
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM12.png" height="auto" width="280">
 
 ### **Applicatie**
-De volledige installatiehandleiding voor de applicatie (voor zowel iPhone als Android) is te vinden in de [PWA-Installatiehandleiding](PWA-Installatiehandleiding.md).
+De volledige installatiehandleiding voor de applicatie (voor zowel iPhone als Android) is terug te vinden in de [PWA-Installatiehandleiding](PWA-Installatiehandleiding.md).
 
 ## Gebruik knop
-Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd een bijhorende melding.
+Bij iedere melding of verandering in de app, krijgt iedere medewerker (docent en student) die op dat moment zijn ingelogd en meldingen ingeschakeld heeft een bijhorende melding.
 
 ### **Meldingen patiënt**
 #### **Hulp gevraagd**
@@ -54,7 +59,7 @@ Hierdoor zal het bijhorende bed op de app terug groen kleuren en de lamp van de 
 
 #### **Extra hulp nodig**
 Als de medewerker **1x lang** de knop indrukt (ongeveer 2s-3s), zal er een extra hulp aanvraag verzonden worden.
-Ook als er meer dan één "Hulp gevraagd" meldingen in een kamer zijn zal automatisch extra hulp opgeroepen worden.
+Ook als er meer dan één "Hulp gevraagd" meldingen in dezelfde een kamer zijn zal automatisch extra hulp opgeroepen worden.
 
 Dit zorgt ervoor dat het bijhorende bed op de app blauw brand, deze als “Extra hulp nodig” geregistreerd wordt en de lamp van de bijhorende kamer blauw kleurt.
 
@@ -109,12 +114,15 @@ Het overzicht van een leerkracht is gelijkaardig aan dat van een leerling. Een l
 
 ### **Aanschakelen**
 Het aanschakelen van de lamp gebeurt door 1x te drukken op de power knop van de powerbank. Deze knop kan eenvoudig bereikt worden door het gat in de behuizing.
-Indien u niet zeker bent of de lamp ingeschakeld is, kunt u altijd het deksel er vanaf schuiven en controleren of de lichtjes van de powerbank effectief aan zijn.<br>
+Na het inschakelen zal de lamp voor 3s groen branden, dit betekend dat de lamp correct is ingeschakeld. Indien u niet zeker bent of de batterij ingeschakeld is, kunt u altijd het deksel er vanaf schuiven en controleren of de lichtjes van de powerbank effectief aan zijn.<br>
  <img src="../handleidingen/afbeeldingen/AfbeeldingUM11.png" height="auto" width="120">
  <img src="../handleidingen/afbeeldingen/AfbeeldingUM3.png" height="auto" width="120">
 
 ### **Uitschakelen**
 Het uitschakelen van de lamp gebeurt door 2x kort achtereenvolgens op de power knop van de powerbank te drukken.
+
+Wanneer de lamp geen veranderingen ontvangt voor een uur lang, zullen de batterij en lamp zich vanzelf uitschakelen.
+
 Indien u niet zeker bent of de lamp ingeschakeld is, kunt u ook weer het deksel er vanaf schuiven en controleren of de lichtjes van de powerbank effectief uit zijn.<br>
  <img src="../handleidingen/afbeeldingen/AfbeeldingUM11.png" height="auto" width="120">
  <img src="../handleidingen/afbeeldingen/AfbeeldingUM3.png" height="auto" width="120">
@@ -127,6 +135,8 @@ Aangezien de lampen werken met een powerbank, moeten deze tijdig herladen worden
 1.  Verwijder de behuizing van de muur.
 
 2.  Verwijder het schuivende deksel van de behuizing, nu zou de powerbank zichtbaar moeten zijn.
+
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM18.png" height="auto" width="240">
 
 3.  Gebruik een USB-C kabel en steek deze in de correcte poort aangeduid op de powerbank als “USB-C In/Out”.
 
@@ -145,6 +155,8 @@ Aangezien de lampen werken met een powerbank, moeten deze tijdig herladen worden
 7.  Vervolgens mag de behuizing terug gesloten worden en opgehangen worden.
 
 8.  Als u de powerbank wilt verwijderen van de behuizing moet u eerst de al aangesloten kabel verwijderen. Deze kabel zou moeten in de “Output-A” poort moeten zitten.
+
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM19.png" height="auto" width="400">
 
 9.  Vervolgens mag de powerbank uit het vak van de behuizing gehaald worden.
 
@@ -180,6 +192,8 @@ Q: De signalisatielamp werkt niet meer.
 A: 
  - Controleer of de kabel van de powerbank naar de microcontroller correct is aangesloten. De kabel moet van de “Output-A” poort van de powerbank naar de “USB” poort van de microcontroller gaan.
 <br>
+
+<img src="../handleidingen/afbeeldingen/AfbeeldingUM19.png" height="auto" width="400">
 
 Q: De knop reageert niet op de ledstrip en de website.
 <br>
