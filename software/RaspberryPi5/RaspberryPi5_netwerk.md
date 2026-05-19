@@ -247,5 +247,5 @@ ssh <username>@<ip-van-de-pi>
 Voorbeeld:
 
 ```bash
-ssh simlab@192.168.8.42
+ssh lab@192.168.8.42 
 ```

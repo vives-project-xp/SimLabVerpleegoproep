@@ -400,7 +400,7 @@ http://<ip-van-de-pi>:8080
 Voorbeeld:
 
 ```text
-http://<ip-van-de-pi>:8080
+http://192.168.1.100:8080 (dit is niet het echte ip-adres)
 ```
 
 ---
